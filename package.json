@@ -1,0 +1,26 @@
+{
+  "name": "oskar-alex",
+  "version": "1.0.0",
+  "description": "Task Manager. Weeks 7-9 Project",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FAC29A/oskar-alex.git"
+  },
+  "author": "Oskar, Alex",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FAC29A/oskar-alex/issues"
+  },
+  "homepage": "https://github.com/FAC29A/oskar-alex#readme",
+  "devDependencies": {
+    "eslint": "^8.52.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^16.2.0",
+    "eslint-plugin-promise": "^6.1.1"
+  }
+}
