@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>UK Crimes</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="images/favicon/favicon.ico" />
+  
+    <!--Leaflet Api-->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+  </head>
+  <body>
+    <div id="map">
+      <div id="titleAndCalendar">
+        <h1 id="neighbourhood">Crime in UK</h1>
+        <input type="month" id="month" name="month" class="input-box" value="2023-08"tabindex="1"/>
+      </div>
+      <div id="mapCrosshair"></div>
+
+    <div id="controls">    
+      <input id="postcode" name="postcode" type="text" class="input-box" value="N77NE" tabindex="2"/>
+      <button id="postcodeButton" type="submit" class="action-button" tabindex="3">Locate Postcode</button>
+    </div>
+
+    <script src="scripts/data.js"></script>
+    <script src="scripts/scripts.js"></script>
+  </body>
+</html>
