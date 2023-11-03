@@ -2,8 +2,66 @@
 :root {
     --medium-dark-grey: rgba(37, 37, 37, 0.719);
     --font-titles:'Roboto', sans-serif;
-    --font-titles:'Playfair Display', serif;
 } 
 
-body{margin: 0;
-    padding: 0}
+body{margin: 3rem;
+    padding: 0
+}
+
+h1 {font-family: var(--font-titles);
+    font-size: xx-large;
+    margin-left:auto;
+    margin-right:auto;
+    width: fit-content;
+}
+
+h2 {font-family: var(--font-titles);
+    font-size: large;
+    margin: 0;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.groupsContainer {
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+}
+
+.tasksContainer {
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 0.2rem;
+}
+
+.toDo {
+    background-color:burlywood;
+}
+.inProgress {
+    background-color: aquamarine;
+}
+.completed {
+    background-color: green;
+}
+
+#bin {
+    display:block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul{
+    padding: 0; 
+}
+
+li{
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 0.2rem;
+    list-style-type: none; 
+    padding: 0.2rem 1rem;
+    background-color: beige;
+}

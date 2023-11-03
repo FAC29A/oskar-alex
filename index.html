@@ -2,16 +2,48 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Manager</title>
-    <link rel="stylesheet" href="styles/styles.css"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
-    <link rel="icon" href="images/favicon/favicon.ico"/>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="images/favicon/favicon.ico" />
     <script defer src="scripts/scripts.js"></script>
   </head>
 
   <body>
-    
+    <h1>Task Manager</h1>
+    <div class="groupsContainer">
+      <div class="tasksContainer toDo">
+        <h2>To-do</h2>
+        <ul>
+          <li>Buy groceries</li>
+          <li>Call the plumber</li>
+          <li>Start online course</li>
+        </ul>
+      </div>
+      <div class="tasksContainer inProgress">
+        <h2>In-Progress</h2>
+        <ul>
+          <li>Work on project report</li>
+          <li>Read 'The Great Gatsby'</li>
+          <li>Organize digital files</li>
+          <li>Read 'The Great Gatsby'</li>
+          <li>Organize digital files</li>
+        </ul>
+      </div>
+      <div class="tasksContainer completed">
+        <h2>Completed</h2>
+        <ul>
+          <li>Renew gym membership</li>
+          <li>Complete tax returns</li>
+          <li>Finish knitting scarf</li>
+        </ul>
+      </div>
+    </div>
+    <div id="bin">Bin</div>
   </body>
 </html>
