@@ -44,6 +44,13 @@ test("Toggling the filter hides completed tasks from the list", () => {
 });
 ```
 
+## Functionalities
+* Create task
+* Move task between groups
+* Delete task
+* Validate if all existing tasks are completed
+* Create, delete, move tasks using only keyboard
+
 ## Project Milestones
 
 ## User Journey
