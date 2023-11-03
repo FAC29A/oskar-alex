@@ -26,11 +26,15 @@ h2 {font-family: var(--font-titles);
     display: flex;
     flex-direction:row;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .tasksContainer {
     display: flex;
+    flex: 1 1 calc(33.333% - 2rem); 
     flex-direction: column;
+    min-width: 10rem;
     border-style: solid;
     border-width: 2px;
     border-radius: 0.2rem;
