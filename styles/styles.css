@@ -1,6 +1,5 @@
 /*Global variables*/
 :root {
-
     --medium-dark-grey: rgba(37, 37, 37, 0.719);
     --font:'Roboto', sans-serif;
 
@@ -43,8 +42,6 @@ h2 {font-family: var(--font);
     flex: 1 1 calc(33.333% - 2rem); 
     flex-direction: column;
     min-width: 10rem;
-   /* border-style: solid;
-    border-width: 2px; */
     border-radius: 0.2rem;
     padding: 0.2rem;
     box-shadow: var(--box-shadow-light);
@@ -81,7 +78,6 @@ ul{
 li, .addTaskField {
     font-family: var(--font);
     font-size: medium;
-    /* border-style: solid; */
     border-width: 2px;
     border-radius: 0.2rem;
     list-style-type: none; 
@@ -103,4 +99,3 @@ li:focus, li:hover, .addTaskField:focus, .addTaskField:hover  {
     border-style: none;
     text-align: center;
 }
- 
