@@ -1,7 +1,12 @@
 /*Global variables*/
 :root {
+
     --medium-dark-grey: rgba(37, 37, 37, 0.719);
-    --font-titles:'Roboto', sans-serif;
+    --font:'Roboto', sans-serif;
+
+    --toDoColour: #a3cef1;
+    --inProgressColour: #ffca28;
+    --completedColour:  #81c784;
 
     --box-shadow-light: 0 0 1.25rem rgba(0,0,0,0.58);
     --box-shadow-small: 0 0 0.75rem rgba(0,0,0,0.4);
@@ -11,14 +16,14 @@ body{margin: 3rem;
     padding: 0
 }
 
-h1 {font-family: var(--font-titles);
+h1 {font-family: var(--font);
     font-size: xx-large;
     margin-left:auto;
     margin-right:auto;
     width: fit-content;
 }
 
-h2 {font-family: var(--font-titles);
+h2 {font-family: var(--font);
     font-size: large;
     margin: 0;
     margin-left:auto;
@@ -53,13 +58,13 @@ h2 {font-family: var(--font-titles);
 }
 
 .toDo {
-    background-color:burlywood;
+    background-color:var(--toDoColour);
 }
 .inProgress {
-    background-color: aquamarine;
+    background-color: var(--inProgressColour);
 }
 .completed {
-    background-color: green;
+    background-color: var(--completedColour);
 }
 
 #bin {
@@ -74,7 +79,9 @@ ul{
 }
 
 li, .addTaskField {
-    border-style: solid;
+    font-family: var(--font);
+    font-size: medium;
+    /* border-style: solid; */
     border-width: 2px;
     border-radius: 0.2rem;
     list-style-type: none; 
@@ -82,5 +89,15 @@ li, .addTaskField {
     background-color: beige;
     margin-bottom: 0.2rem;
     box-shadow: var(--box-shadow-small);
+    transition: transform 0.15s ease;
+}
+
+li:focus, li:hover, .addTaskField:focus, .addTaskField:hover  {
+    transform: scale(1.03); /* slightly increases the size */
+}
+
+.addTaskField {
+    color: brown;
+    border-style: none;
 }
  
