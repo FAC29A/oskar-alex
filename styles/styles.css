@@ -2,8 +2,85 @@
 :root {
     --medium-dark-grey: rgba(37, 37, 37, 0.719);
     --font-titles:'Roboto', sans-serif;
-    --font-titles:'Playfair Display', serif;
+
+    --box-shadow-light: 0 0 1.25rem rgba(0,0,0,0.58);
+    --box-shadow-small: 0 0 0.75rem rgba(0,0,0,0.4);
 } 
 
-body{margin: 0;
-    padding: 0}
+body{margin: 3rem;
+    padding: 0
+}
+
+h1 {font-family: var(--font-titles);
+    font-size: xx-large;
+    margin-left:auto;
+    margin-right:auto;
+    width: fit-content;
+}
+
+h2 {font-family: var(--font-titles);
+    font-size: large;
+    margin: 0;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.groupsContainer {
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tasksContainer {
+    display: flex;
+    flex: 1 1 calc(33.333% - 2rem); 
+    flex-direction: column;
+    min-width: 10rem;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 0.2rem;
+    padding: 0.2rem;
+    box-shadow: var(--box-shadow-light);
+}
+
+.listAndField{
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+    justify-content: space-between;
+}
+
+.toDo {
+    background-color:burlywood;
+}
+.inProgress {
+    background-color: aquamarine;
+}
+.completed {
+    background-color: green;
+}
+
+#bin {
+    display:block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul{
+    padding: 0; 
+}
+
+li, .addTaskField {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 0.2rem;
+    list-style-type: none; 
+    padding: 0.2rem 1rem;
+    background-color: beige;
+    margin-bottom: 0.2rem;
+    box-shadow: var(--box-shadow-small);
+}
+ 
