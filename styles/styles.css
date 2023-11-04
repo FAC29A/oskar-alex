@@ -9,7 +9,7 @@
     --completedColour:  #81c784;
 
     --box-shadow-light: 0 0 1.25rem rgba(0,0,0,0.58);
-    --box-shadow-small: 0 0 0.75rem rgba(0,0,0,0.4);
+    --box-shadow-hard: 0 0 3.75rem rgba(0,0,0,0.9);
 } 
 
 body{margin: 3rem;
@@ -43,8 +43,8 @@ h2 {font-family: var(--font);
     flex: 1 1 calc(33.333% - 2rem); 
     flex-direction: column;
     min-width: 10rem;
-    border-style: solid;
-    border-width: 2px;
+   /* border-style: solid;
+    border-width: 2px; */
     border-radius: 0.2rem;
     padding: 0.2rem;
     box-shadow: var(--box-shadow-light);
@@ -88,16 +88,19 @@ li, .addTaskField {
     padding: 0.2rem 1rem;
     background-color: beige;
     margin-bottom: 0.2rem;
-    box-shadow: var(--box-shadow-small);
+    box-shadow: var(--box-shadow-light);
     transition: transform 0.15s ease;
 }
 
 li:focus, li:hover, .addTaskField:focus, .addTaskField:hover  {
-    transform: scale(1.03); /* slightly increases the size */
+    transform: scale(1.03);
+    box-shadow: var(--box-shadow-hard);
+    background-color: rgb(275,275,250);
 }
 
 .addTaskField {
-    color: brown;
+    color: gray;
     border-style: none;
+    text-align: center;
 }
  
