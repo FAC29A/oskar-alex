@@ -19,14 +19,19 @@
     <div class="groupsContainer">
       <div class="tasksContainer toDo">
         <h2>To-do</h2>
-        <ul>
-          <li>Buy groceries</li>
-          <li>Call the plumber</li>
-          <li>Start online course</li>
-        </ul>
+        <div class="listAndField">
+          <ul>
+            <li>Buy groceries</li>
+            <li>Call the plumber</li>
+            <li>Start online course</li>
+          </ul>
+          <input class="addTaskField" id="addToDo" value="Add task" />
+        </div>
       </div>
+
       <div class="tasksContainer inProgress">
         <h2>In-Progress</h2>
+        <div class="listAndField">
         <ul>
           <li>Work on project report</li>
           <li>Read 'The Great Gatsby'</li>
@@ -34,14 +39,18 @@
           <li>Read 'The Great Gatsby'</li>
           <li>Organize digital files</li>
         </ul>
+        <input class="addTaskField" id="addInProgress" value="Add task" />
+      </div>
       </div>
       <div class="tasksContainer completed">
         <h2>Completed</h2>
+        <div class="listAndField">
         <ul>
           <li>Renew gym membership</li>
           <li>Complete tax returns</li>
           <li>Finish knitting scarf</li>
         </ul>
+        <input class="addTaskField" id="addCompleted" value="Add task" />
       </div>
     </div>
     <div id="bin">Bin</div>
