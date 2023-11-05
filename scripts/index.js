@@ -49,18 +49,16 @@ document.querySelectorAll('.addTaskField').forEach((field) => {
   field.addEventListener('keypress', handleAddTaskFieldEnter)
 })
 
-// Modify the createTaskUsingTemplate function to use correct selectors
+// Add task to group
 export function createTaskUsingTemplate(date, text, state, group) {
   const containerElement = document.querySelector(group)
   const template = document.querySelector('#taskTemplate')
   const domFragment = template.content.cloneNode(true)
-  domFragment.querySelector('.taskDate').textContent = date // Fix the selectors here
+  domFragment.querySelector('.taskDate').textContent = date
   domFragment.querySelector('.taskText').textContent = text
   domFragment.querySelector('.taskState').textContent = state
   containerElement.appendChild(domFragment)
 }
-
-export function addTask(group, task) {}
 
 export function deleteTask(task) {}
 
