@@ -75,7 +75,7 @@ ul{
     padding: 0; 
 }
 
-li, .addTaskField {
+.taskItem, .addTaskField {
     font-family: var(--font);
     font-size: medium;
     border-width: 2px;
@@ -88,7 +88,7 @@ li, .addTaskField {
     transition: transform 0.15s ease;
 }
 
-li:focus, li:hover, .addTaskField:focus, .addTaskField:hover  {
+.taskItem:focus, .taskItem:hover, .addTaskField:focus, .addTaskField:hover  {
     transform: scale(1.03);
     box-shadow: var(--box-shadow-hard);
     background-color: rgb(275,275,250);
@@ -98,4 +98,8 @@ li:focus, li:hover, .addTaskField:focus, .addTaskField:hover  {
     color: gray;
     border-style: none;
     text-align: center;
+}
+
+.taskItem {
+    display:flex;
 }
