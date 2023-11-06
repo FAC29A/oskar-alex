@@ -11,8 +11,10 @@
     --box-shadow-hard: 0 0 3.75rem rgba(0,0,0,0.9);
 } 
 
-body{margin: 3rem;
-    padding: 0
+body {
+    margin: 3rem;
+    margin-right: 0;
+    padding: 0;
 }
 
 h1 {font-family: var(--font);
@@ -38,10 +40,27 @@ h1 {font-family: var(--font);
     justify-content: space-between;
 }
 
+.outerFlex {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.hidden {
+    width: 20px !important;
+}
+
+#sidebar {
+    display: block;
+    height: 1000px;
+    width: 30%;
+    background-color: beige;
+}
 .groupsContainer {
     display: flex;
     flex-direction:row;
     justify-content: space-between;
+    align-content: flex-start;
     flex-wrap: wrap;
     gap: 1rem;
 }
@@ -51,6 +70,7 @@ h1 {font-family: var(--font);
     flex: 1 1 calc(33.333% - 2rem); 
     flex-direction: column;
     min-width: 10rem;
+    height: fit-content;
     border-radius: 0.2rem;
     padding: 0.2rem;
     box-shadow: var(--box-shadow-light);

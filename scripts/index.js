@@ -123,3 +123,13 @@ const newGroupButton = document.getElementById('createGroupButton')
 newGroupButton.addEventListener('click', (event) => {
   createGroupUsingTemplate()
 })
+
+// Hide/show Sidebar
+
+function hideSidebar() {
+  const sidebar = document.getElementById("sidebar"); // Access the specific element
+  sidebar.classList.toggle('hidden')
+}
+
+const hideSidebarButton = document.getElementsByClassName("hideSidebar")[0]; // Access the specific element
+hideSidebarButton.addEventListener("click", hideSidebar);
