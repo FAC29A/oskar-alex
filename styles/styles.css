@@ -109,13 +109,21 @@ ul{
     text-align: center;
 }
 
-.taskItem {
-    display:flex;
+.taskItem{
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    flex-wrap: nowrap;
 }
 
-p {
+p{
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin: 0;
 }
+
 
 button {
 }
