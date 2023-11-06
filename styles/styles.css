@@ -32,6 +32,12 @@ h1 {font-family: var(--font);
     width: 100%;
 }
 
+.topBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .groupsContainer {
     display: flex;
     flex-direction:row;
@@ -109,4 +115,7 @@ ul{
 
 p {
     margin: 0;
+}
+
+button {
 }

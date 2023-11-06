@@ -17,28 +17,22 @@
   <body>
     <h1>Task Manager</h1>
     <button id="createGroup">New Group</button>
-    <div class="groupsContainer">
-    </div>
-    <div id="bin">Bin</div>
+    <div class="groupsContainer"></div>
   </body>
+
   <template id="groupTemplate">
     <div class="tasksContainer">
-
-      <input class="groupTitle" value="New Group">
-
+      <div class="topBar">
+        <input class="groupTitle" value="New Group" />
+        <button class="deleteGroupButton">X</button>
+      </div>
       <div class="listAndField">
-        <ul id="listToDo">
-        </ul>
-        <input
-          class="addTaskField"
-       
-          placeholder="Add task"
-          tabindex="1"
-        />
+        <ul id="listToDo"></ul>
+        <input class="addTaskField" placeholder="Add task" tabindex="1" />
       </div>
     </div>
   </template>
-  
+
   <template id="taskTemplate">
     <li class="taskItem">
       <p class="taskDate"></p>

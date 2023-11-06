@@ -53,11 +53,9 @@ export function createGroupUsingTemplate(groupName, color) {
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
   if (groupName) {
-
     //Change this
     domFragment.querySelector('.groupTitle').value = groupName
   }
-
   domFragment.querySelector('.tasksContainer').id = groupName
   // Assign an ID with a string prefix followed by the groupID
   const tasksContainerId = `group-${groupID}`;
@@ -65,10 +63,23 @@ export function createGroupUsingTemplate(groupName, color) {
   domFragment.querySelector('.addTaskField').id = `addTaskField-${groupID}`;
   const field = domFragment.querySelector('.addTaskField')
   field.addEventListener('keypress', (event) => handleAddTaskFieldEnter(event,`#${tasksContainerId}`));
+
+  const deleteButton = domFragment.querySelector('.deleteGroupButton')
+  deleteButton.addEventListener('click', () => deleteGroup(tasksContainerId));
+
   containerElement.appendChild(domFragment)
   const taskContainer = document.getElementById(tasksContainerId)
   if (color) {taskContainer.style.backgroundColor = color}
   groupID ++
+}
+// Delete Group
+function deleteGroup(groupId) {
+  const groupElement = document.getElementById(groupId);
+  if (groupElement) {
+    groupElement.remove(); // Removes the whole group container
+  } else {
+    console.error(`No element found with ID ${groupId}`);
+  }
 }
 
 window.addEventListener('load', (event) => {
@@ -76,6 +87,7 @@ window.addEventListener('load', (event) => {
     createGroupUsingTemplate(element.groupName, element.backgroundColour)
   });
 })
+
 
 const newGroupButton = document.getElementById("createGroup")
 newGroupButton.addEventListener('click', (event) => {createGroupUsingTemplate()})
