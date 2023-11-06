@@ -1,3 +1,6 @@
+// Deafult Groups
+
+
 // Definition of functions and JS related with DOM manipulation
 
 // Helper function to format today's date in short format
@@ -63,3 +66,17 @@ export function createTaskUsingTemplate(date, text, state, group) {
 export function deleteTask(task) {}
 
 export function moveTask(origin, end, task) {}
+
+// Add group
+export function createGroupUsingTemplate(groupName) {
+  const containerElement = document.querySelector('.groupsContainer')
+  const template = document.querySelector('#groupTemplate')
+  const domFragment = template.content.cloneNode(true)
+  domFragment.querySelector('h2').textContent = groupName
+  containerElement.appendChild(domFragment)
+}
+
+
+window.addEventListener('load', (event) => {
+  createGroupUsingTemplate('First Group')
+});

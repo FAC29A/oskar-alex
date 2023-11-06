@@ -17,7 +17,7 @@
   <body>
     <h1>Task Manager</h1>
     <div class="groupsContainer">
-      <div class="tasksContainer toDo">
+      <!-- <div class="tasksContainer toDo">
         <h2>To-do</h2>
         <div class="listAndField">
           <ul id="listToDo">
@@ -67,11 +67,25 @@
             tabindex="3"
           />
         </div>
-      </div>
+      </div> -->
     </div>
     <div id="bin">Bin</div>
   </body>
-
+  <template id="groupTemplate">
+    <div class="tasksContainer">
+      <h2>New Group</h2>
+      <div class="listAndField">
+        <ul id="listToDo">
+        </ul>
+        <input
+          class="addTaskField"
+          id="addToDo"
+          placeholder="Add task"
+          tabindex="1"
+        />
+      </div>
+    </div>
+  </template>
   <template id="taskTemplate">
     <li class="taskItem">
       <p class="taskDate"></p>
