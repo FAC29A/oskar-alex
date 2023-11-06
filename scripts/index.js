@@ -45,10 +45,12 @@ function handleAddTaskFieldEnter(event, group) {
 }
 
 // Remove Task
- function deleteTask(event) {
+function deleteTask(event) {
   const task = event.target
-  if (task.value.length === 0) {task.parentElement.remove()}
- } 
+  if (task.value.length === 0) {
+    task.parentElement.remove()
+  }
+}
 
 // Add task to group
 export function createTaskUsingTemplate(text, group) {
@@ -61,12 +63,12 @@ export function createTaskUsingTemplate(text, group) {
   const field = domFragment.querySelector('.taskText')
   field.value = text
   // event listener to remove task
-  field.addEventListener('keypress', function(event) {
+  field.addEventListener('keypress', function (event) {
     if (event.key === 'Enter' || event.code === 'Enter') {
       deleteTask(event)
     }
   })
-  
+
   taskList.appendChild(domFragment)
 }
 
@@ -126,10 +128,9 @@ newGroupButton.addEventListener('click', (event) => {
 
 // Hide/show Sidebar
 
-function hideSidebar() {
-  const sidebar = document.getElementById("sidebar"); // Access the specific element
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar') // Access the specific element
   sidebar.classList.toggle('hidden')
 }
 
-const hideSidebarButton = document.getElementsByClassName("hideSidebar")[0]; // Access the specific element
-hideSidebarButton.addEventListener("click", hideSidebar);
+document.getElementById('sidebar').addEventListener('click', toggleSidebar)
