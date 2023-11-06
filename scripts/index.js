@@ -19,14 +19,9 @@ function handleAddTaskFieldEnter(event, group) {
   if (event.key === 'Enter') {
     const inputField = event.target
     const taskText = inputField.value.trim()
-    const taskDate = getTodaysDateShortFormat()
-    const taskState = 'pending'
-
-    console.log(`TaskText ${taskText} group ${group}`)
-    if (taskText && group)
 
       // Create and add the task
-      createTaskUsingTemplate(taskDate, taskText, taskState, group)
+      createTaskUsingTemplate(taskText, group)
 
       // Clear the input field after adding the task
       inputField.value = ''
@@ -34,16 +29,14 @@ function handleAddTaskFieldEnter(event, group) {
   }
 
 // Add task to group
-export function createTaskUsingTemplate(date, text, state, group) {
+export function createTaskUsingTemplate(text, group) {
   const containerElement = document.querySelector(group)
   const taskList = containerElement.querySelector('#listToDo');
   console.log(`containerElement ${containerElement}`)
   console.log(`taskList ${taskList}`)
   const template = document.querySelector('#taskTemplate')
   const domFragment = template.content.cloneNode(true)
-  domFragment.querySelector('.taskDate').textContent = date
-  domFragment.querySelector('.taskText').textContent = text
-  domFragment.querySelector('.taskState').textContent = state
+  domFragment.querySelector('.taskText').value = text
   taskList.appendChild(domFragment)
 }
 
@@ -71,11 +64,13 @@ export function createGroupUsingTemplate(groupName, color) {
   groupID ++
 }
 
+// Create initial deafult groups
 window.addEventListener('load', (event) => {
   deafultGroups.forEach(element => {
     createGroupUsingTemplate(element.groupName, element.backgroundColour)
   });
 })
 
+// Button for creating a new group
 const newGroupButton = document.getElementById("createGroup")
 newGroupButton.addEventListener('click', (event) => {createGroupUsingTemplate()})
