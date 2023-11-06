@@ -23,21 +23,6 @@ function handleAddTaskFieldEnter(event, group) {
 
     console.log(`TaskText ${taskText} group ${group}`)
     if (taskText && group)
-      // Determine the group based on the id of the input field
-    
-      // switch (inputField.id) {
-      //   case 'addToDo':
-      //     group = '#listToDo'
-      //     break
-      //   case 'addInProgress':
-      //     group = '#listInProgress'
-      //     break
-      //   case 'addCompleted':
-      //     group = '#listCompleted'
-      //     break
-      //   default:
-      //     return // Exit if the group is not recognized
-      // }
 
       // Create and add the task
       createTaskUsingTemplate(taskDate, taskText, taskState, group)
@@ -46,12 +31,6 @@ function handleAddTaskFieldEnter(event, group) {
       inputField.value = ''
     }
   }
-
-
-// // Attach the event listener to all addTaskFields
-// document.querySelectorAll('.addTaskField').forEach((field) => {
-//   field.addEventListener('keypress', handleAddTaskFieldEnter)
-// })
 
 // Add task to group
 export function createTaskUsingTemplate(date, text, state, group) {
