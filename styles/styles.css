@@ -65,6 +65,7 @@ h2 {font-size: large;
     background-color: beige;
     box-shadow: var(--box-shadow-light);
     padding: 0.5rem;
+    cursor: pointer;
 }
 .groupsContainer {
     display: flex;
@@ -173,3 +174,6 @@ p, .taskText, .taskText:focus, .taskText:hover{
     margin-bottom: 1rem;
   }
   
+  .deleteGroupButton{
+    cursor: pointer;
+  }
