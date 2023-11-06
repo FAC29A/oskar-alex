@@ -68,7 +68,6 @@ export function createTaskUsingTemplate(text, group) {
       deleteTask(event)
     }
   })
-
   taskList.appendChild(domFragment)
 }
 
@@ -78,7 +77,7 @@ export function createGroupUsingTemplate(groupName, color) {
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
   if (groupName) {
-    //Change this
+
     domFragment.querySelector('.groupTitle').value = groupName
   }
   domFragment.querySelector('.tasksContainer').id = groupName
@@ -127,7 +126,6 @@ newGroupButton.addEventListener('click', (event) => {
 })
 
 // Hide/show Sidebar
-
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar') // Access the specific element
   sidebar.classList.toggle('hidden')
