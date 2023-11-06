@@ -32,12 +32,15 @@
   <template id="groupTemplate">
     <div class="tasksContainer">
       <div class="topBar">
-        <input class="groupTitle"  placeholder="Add Title" />
+        <input class="groupTitle" placeholder="Add Title" />
         <button class="deleteGroupButton">X</button>
       </div>
       <div class="listAndField">
         <ul id="listToDo"></ul>
-        <input class="addTaskField" placeholder="Add task" tabindex="1" />
+        <div class="addTaskFieldAndButton">
+          <input class="addTaskField" placeholder="Add task" />
+          <button class="addTaskButton">+</button>
+        </div>
       </div>
     </div>
   </template>

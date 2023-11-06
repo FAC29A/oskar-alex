@@ -96,27 +96,18 @@ h2 {font-size: x-large;
     justify-content: space-between;
 }
 
-.toDo {
-    background-color:var(--toDoColour);
-}
-.inProgress {
-    background-color: var(--inProgressColour);
-}
-.completed {
-    background-color: var(--completedColour);
-}
-
 ul{
     padding: 0; 
 }
 
 .taskItem, .addTaskField {
-    font-family: var(--font);
+    display: flex;
+    justify-content: space-between;
     font-size: medium;
-    border-width: 2px;
+    border-style: none;
     border-radius: 0.2rem;
     list-style-type: none; 
-    padding: 0.2rem 1rem;
+    padding: 0.2rem 0.2rem;
     background-color: beige;
     margin-bottom: 0.2rem;
     box-shadow: var(--box-shadow-light);
@@ -130,26 +121,16 @@ ul{
     background-color: rgb(275,275,250);
 }
 
-.taskItem {
+.addTaskFieldAndButton{
     display: flex;
-    justify-content: space-between;
-    padding: 0.2rem;
-
-
+    width: 100%;
 }
 
 .addTaskField {
-    color: gray;
-    border-style: none;
     text-align: center;
 }
 
-.taskItem{
-    display: flex;
-    flex-direction: row;
-    white-space: nowrap;
-    flex-wrap: nowrap;
-}
+
 
 p, .taskText, .taskText:focus, .taskText:hover{
     white-space: nowrap;
@@ -174,22 +155,22 @@ p, .taskText, .taskText:focus, .taskText:hover{
     padding: 10px 20px;
     cursor: pointer;
     margin-bottom: 1rem;
-  }
+}
 
-  .moveToCompleted{
-    background-image: url('../images/check.png');
-    background-color: transparent;
-    height:1rem;
-    width: 1rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    margin: 0;
+.moveToCompleted{
+background-image: url('../images/check.png');
+background-color: transparent;
+height:1rem;
+width: 1rem;
+background-size: cover;
+background-repeat: no-repeat;
+border: none;
+outline: none;
+cursor: pointer;
+margin: 0;
 
-  }
-  
-  .deleteGroupButton{
-    cursor: pointer;
-  }
+}
+
+.deleteGroupButton{
+cursor: pointer;
+}
