@@ -1,4 +1,5 @@
 // Deafult Groups
+import { deafultGroups } from "./index.data.js"
 let groupID = 0
 
 // Definition of functions and JS related with DOM manipulation
@@ -47,7 +48,7 @@ export function createTaskUsingTemplate(date, text, state, group) {
 }
 
 // Add group
-export function createGroupUsingTemplate(groupName) {
+export function createGroupUsingTemplate(groupName, Color) {
   const containerElement = document.querySelector('.groupsContainer')
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
@@ -61,10 +62,14 @@ export function createGroupUsingTemplate(groupName) {
   const field = domFragment.querySelector('.addTaskField')
   field.addEventListener('keypress', (event) => handleAddTaskFieldEnter(event,`#${tasksContainerId}`));
   containerElement.appendChild(domFragment)
+
+  const taskContainer = document.getElementById(tasksContainerId)
+  taskContainer.style.backgroundColor = Color
   groupID ++
 }
 
 window.addEventListener('load', (event) => {
-  createGroupUsingTemplate('First Group')
-  createGroupUsingTemplate('Second Group')
+  deafultGroups.forEach(element => {
+    createGroupUsingTemplate(element.groupName, element.backgroundColour)
+  });
 })
