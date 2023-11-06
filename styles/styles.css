@@ -126,12 +126,15 @@ p{
 
 #createGroupButton {
     background-image: url('../images/newGroup.png');
-    height: 100%;
+    background-color: transparent;
+    height: 3rem;
+    width: 3rem;
     background-size: cover;
     background-repeat: no-repeat;
     border: none;
     outline: none;
     padding: 10px 20px;
     cursor: pointer;
+    margin-bottom: 1rem;
   }
   
