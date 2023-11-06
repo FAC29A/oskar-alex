@@ -76,6 +76,10 @@ export function createGroupUsingTemplate(groupName, color) {
   const containerElement = document.querySelector('.groupsContainer')
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
+
+  // Define the group title and set tabindex
+  const groupTitle = domFragment.querySelector('.groupTitle');
+
   if (groupName) {
     domFragment.querySelector('.groupTitle').value = groupName
     domFragment
@@ -96,6 +100,13 @@ export function createGroupUsingTemplate(groupName, color) {
   deleteButton.addEventListener('click', () => deleteGroup(tasksContainerId))
 
   containerElement.appendChild(domFragment)
+
+  // After appending, set the focus on the group title
+  // Using requestAnimationFrame to ensure the focus occurs after any reflows or repaints
+  requestAnimationFrame(() => {
+    groupTitle.focus();
+  });
+
   const taskContainer = document.getElementById(tasksContainerId)
   if (color) {
     taskContainer.style.backgroundColor = color
@@ -115,19 +126,20 @@ function deleteGroup(groupId) {
   }
 }
 
-// Create initial deafult groups
+// Create initial default groups
 window.addEventListener('load', (event) => {
   deafultGroups.forEach((element) => {
     createGroupUsingTemplate(element.groupName, element.backgroundColour)
+    
   })
 
-  // Select all elements with the class 'groupTitle'
+  /*// Select all elements with the class 'groupTitle'
   const groupTitles = document.querySelectorAll('.groupTitle')
   // Check if there are any elements returned
   if (groupTitles.length > 0) {
     // Focus the last element in the NodeList
     groupTitles[groupTitles.length - 1].focus()
-  }
+  }*/
 })
 
 const newGroupButton = document.getElementById('createGroupButton')
