@@ -28,6 +28,12 @@ function handleAddTaskFieldEnter(event, group) {
     }
   }
 
+// Remove Task
+ function deleteTask(event) {
+  const task = event.target
+  if (task.value.length === 0) {task.parentElement.remove()}
+ } 
+
 // Add task to group
 export function createTaskUsingTemplate(text, group) {
   const containerElement = document.querySelector(group)
@@ -36,7 +42,15 @@ export function createTaskUsingTemplate(text, group) {
   console.log(`taskList ${taskList}`)
   const template = document.querySelector('#taskTemplate')
   const domFragment = template.content.cloneNode(true)
-  domFragment.querySelector('.taskText').value = text
+  const field = domFragment.querySelector('.taskText')
+  field.value = text
+  // event listener to remove task
+  field.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter' || event.code === 'Enter') {
+      deleteTask(event)
+    }
+  })
+  
   taskList.appendChild(domFragment)
 }
 
