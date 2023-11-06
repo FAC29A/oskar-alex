@@ -126,6 +126,7 @@ p{
 
 #createGroup {
     background-image: url('../images/newGroup.png');
+    height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
     border: none;
