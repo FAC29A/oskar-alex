@@ -73,10 +73,14 @@ export function createGroupUsingTemplate(groupName) {
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
   domFragment.querySelector('h2').textContent = groupName
-  containerElement.appendChild(domFragment)
+  containerElement.appendChild(domFragment) 
+  const field = document.querySelector('.addTaskField')
+  field.addEventListener('keypress', handleAddTaskFieldEnter)
 }
 
 
 window.addEventListener('load', (event) => {
   createGroupUsingTemplate('First Group')
+  createGroupUsingTemplate('Second Group')
+
 });
