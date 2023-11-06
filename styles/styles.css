@@ -22,11 +22,13 @@ h1 {font-family: var(--font);
     width: fit-content;
 }
 
-h2 {font-family: var(--font);
+.groupTitle {font-family: var(--font);
     font-size: large;
     margin: 0;
     margin-left:auto;
     margin-right:auto;
+    background-color: transparent;
+    border-style: none;
 }
 
 .groupsContainer {

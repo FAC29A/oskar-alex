@@ -53,7 +53,9 @@ export function createGroupUsingTemplate(groupName, color) {
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
   if (groupName) {
-    domFragment.querySelector('h2').textContent = groupName
+
+    //Change this
+    domFragment.querySelector('.groupTitle').value = groupName
   }
 
   domFragment.querySelector('.tasksContainer').id = groupName
