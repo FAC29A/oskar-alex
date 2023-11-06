@@ -45,6 +45,7 @@ h1 {font-family: var(--font);
 .outerFlex {
     display: flex;
     justify-content: space-between;
+    gap:1rem;
 
 }
 
@@ -54,9 +55,11 @@ h1 {font-family: var(--font);
 
 #sidebar {
     display: block;
-    height: 1000px;
-    width: 30%;
+    height: auto;
+    /* width: 30%;*/
     background-color: beige;
+    box-shadow: var(--box-shadow-light);
+    padding: 0.5rem;
 }
 .groupsContainer {
     display: flex;
