@@ -74,3 +74,6 @@ window.addEventListener('load', (event) => {
     createGroupUsingTemplate(element.groupName, element.backgroundColour)
   });
 })
+
+const newGroupButton = document.getElementById("createGroup")
+newGroupButton.addEventListener('click', (event) => {createGroupUsingTemplate()})
