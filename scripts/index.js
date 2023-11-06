@@ -56,13 +56,15 @@ function handleAddTaskFieldEnter(event, group) {
 // Add task to group
 export function createTaskUsingTemplate(date, text, state, group) {
   const containerElement = document.querySelector(group)
+  const taskList = containerElement.querySelector('#listToDo');
   console.log(`containerElement ${containerElement}`)
+  console.log(`taskList ${taskList}`)
   const template = document.querySelector('#taskTemplate')
   const domFragment = template.content.cloneNode(true)
   domFragment.querySelector('.taskDate').textContent = date
   domFragment.querySelector('.taskText').textContent = text
   domFragment.querySelector('.taskState').textContent = state
-  containerElement.appendChild(domFragment)
+  taskList.appendChild(domFragment)
 }
 
 // Add group
