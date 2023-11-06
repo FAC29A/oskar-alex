@@ -1,6 +1,6 @@
 // Deafult Groups
 import { deafultGroups } from './index.data.js'
-let groupID = 0
+let groupID = 1
 
 // Definition of functions and JS related with DOM manipulation
 
@@ -77,8 +77,10 @@ export function createGroupUsingTemplate(groupName, color) {
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
   if (groupName) {
-
     domFragment.querySelector('.groupTitle').value = groupName
+    domFragment
+      .querySelector('.groupTitle')
+      .setAttribute('tabindex', groupID.toString())
   }
   domFragment.querySelector('.tasksContainer').id = groupName
   // Assign an ID with a string prefix followed by the groupID
@@ -100,9 +102,9 @@ export function createGroupUsingTemplate(groupName, color) {
   } else {
     taskContainer.style.backgroundColor = getRandomPastelColor()
   }
-
   groupID++
 }
+
 // Delete Group
 function deleteGroup(groupId) {
   const groupElement = document.getElementById(groupId)
@@ -118,6 +120,14 @@ window.addEventListener('load', (event) => {
   deafultGroups.forEach((element) => {
     createGroupUsingTemplate(element.groupName, element.backgroundColour)
   })
+
+  // Select all elements with the class 'groupTitle'
+  const groupTitles = document.querySelectorAll('.groupTitle')
+  // Check if there are any elements returned
+  if (groupTitles.length > 0) {
+    // Focus the last element in the NodeList
+    groupTitles[groupTitles.length - 1].focus()
+  }
 })
 
 const newGroupButton = document.getElementById('createGroupButton')

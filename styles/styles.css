@@ -64,6 +64,7 @@ h2 {font-size: large;
     box-shadow: var(--box-shadow-light);
     padding: 0.5rem;
     cursor: pointer;
+    overflow: hidden;
 }
 .groupsContainer {
     display: flex;
@@ -175,7 +176,8 @@ p, .taskText, .taskText:focus, .taskText:hover{
   .moveToCompleted{
     background-image: url('../images/check.png');
     background-color: transparent;
-    height:auto;
+    height:1rem;
+    width: 1rem;
     background-size: cover;
     background-repeat: no-repeat;
     border: none;
