@@ -106,7 +106,7 @@ window.addEventListener('load', (event) => {
   })
 })
 
-const newGroupButton = document.getElementById('createGroup')
+const newGroupButton = document.getElementById('createGroupButton')
 newGroupButton.addEventListener('click', (event) => {
   createGroupUsingTemplate()
 })
