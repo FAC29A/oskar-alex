@@ -72,10 +72,13 @@ export function createGroupUsingTemplate(groupName) {
   const domFragment = template.content.cloneNode(true)
   domFragment.querySelector('h2').textContent = groupName
   domFragment.querySelector('.tasksContainer').id = groupName
+  // Assign an ID with a string prefix followed by the groupID
+  const tasksContainerId = `group-${groupID}`;
 
-  domFragment.querySelector('.addTaskField').id = groupID
+  domFragment.querySelector('.tasksContainer').id = tasksContainerId;
+  domFragment.querySelector('.addTaskField').id = `addTaskField-${groupID}`;
   const field = domFragment.querySelector('.addTaskField')
-  field.addEventListener('keypress', (event) => handleAddTaskFieldEnter(event, groupID));
+  field.addEventListener('keypress', (event) => handleAddTaskFieldEnter(event,`#${tasksContainerId}`));
   containerElement.appendChild(domFragment)
   groupID ++
 }
