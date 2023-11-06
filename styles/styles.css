@@ -28,8 +28,10 @@ h1 {font-family: var(--font);
     margin-left:auto;
     margin-right:auto;
     background-color: transparent;
-    border-style: none;
+    border: none;
     width: 100%;
+    outline:none
+
 }
 
 .topBar{
@@ -95,6 +97,7 @@ ul{
     margin-bottom: 0.2rem;
     box-shadow: var(--box-shadow-light);
     transition: transform 0.15s ease;
+    outline: none;
 }
 
 .taskItem:focus, .taskItem:hover, .addTaskField:focus, .addTaskField:hover  {
@@ -116,12 +119,15 @@ ul{
     flex-wrap: nowrap;
 }
 
-p{
+p, .taskText, .taskText:focus, .taskText:hover{
     white-space: nowrap;
     flex-wrap: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
 }
 
 #createGroupButton {
