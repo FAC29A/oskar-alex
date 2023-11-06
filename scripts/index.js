@@ -48,23 +48,24 @@ export function createTaskUsingTemplate(date, text, state, group) {
 }
 
 // Add group
-export function createGroupUsingTemplate(groupName, Color) {
+export function createGroupUsingTemplate(groupName, color) {
   const containerElement = document.querySelector('.groupsContainer')
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
-  domFragment.querySelector('h2').textContent = groupName
+  if (groupName) {
+    domFragment.querySelector('h2').textContent = groupName
+  }
+
   domFragment.querySelector('.tasksContainer').id = groupName
   // Assign an ID with a string prefix followed by the groupID
   const tasksContainerId = `group-${groupID}`;
-
   domFragment.querySelector('.tasksContainer').id = tasksContainerId;
   domFragment.querySelector('.addTaskField').id = `addTaskField-${groupID}`;
   const field = domFragment.querySelector('.addTaskField')
   field.addEventListener('keypress', (event) => handleAddTaskFieldEnter(event,`#${tasksContainerId}`));
   containerElement.appendChild(domFragment)
-
   const taskContainer = document.getElementById(tasksContainerId)
-  taskContainer.style.backgroundColor = Color
+  if (color) {taskContainer.style.backgroundColor = color}
   groupID ++
 }
 
