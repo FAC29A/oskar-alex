@@ -1,5 +1,5 @@
 // Deafult Groups
-
+let groupID = 0
 
 // Definition of functions and JS related with DOM manipulation
 
@@ -14,29 +14,30 @@ function getTodaysDateShortFormat() {
 }
 
 // Function to handle the 'Enter' key in addTaskFields
-function handleAddTaskFieldEnter(event) {
+function handleAddTaskFieldEnter(event, group) {
   if (event.key === 'Enter') {
     const inputField = event.target
     const taskText = inputField.value.trim()
     const taskDate = getTodaysDateShortFormat()
     const taskState = 'pending'
 
-    if (taskText) {
+    console.log(`TaskText ${taskText} group ${group}`)
+    if (taskText && group)
       // Determine the group based on the id of the input field
-      let group
-      switch (inputField.id) {
-        case 'addToDo':
-          group = '#listToDo'
-          break
-        case 'addInProgress':
-          group = '#listInProgress'
-          break
-        case 'addCompleted':
-          group = '#listCompleted'
-          break
-        default:
-          return // Exit if the group is not recognized
-      }
+    
+      // switch (inputField.id) {
+      //   case 'addToDo':
+      //     group = '#listToDo'
+      //     break
+      //   case 'addInProgress':
+      //     group = '#listInProgress'
+      //     break
+      //   case 'addCompleted':
+      //     group = '#listCompleted'
+      //     break
+      //   default:
+      //     return // Exit if the group is not recognized
+      // }
 
       // Create and add the task
       createTaskUsingTemplate(taskDate, taskText, taskState, group)
@@ -45,16 +46,17 @@ function handleAddTaskFieldEnter(event) {
       inputField.value = ''
     }
   }
-}
 
-// Attach the event listener to all addTaskFields
-document.querySelectorAll('.addTaskField').forEach((field) => {
-  field.addEventListener('keypress', handleAddTaskFieldEnter)
-})
+
+// // Attach the event listener to all addTaskFields
+// document.querySelectorAll('.addTaskField').forEach((field) => {
+//   field.addEventListener('keypress', handleAddTaskFieldEnter)
+// })
 
 // Add task to group
 export function createTaskUsingTemplate(date, text, state, group) {
   const containerElement = document.querySelector(group)
+  console.log(`containerElement ${containerElement}`)
   const template = document.querySelector('#taskTemplate')
   const domFragment = template.content.cloneNode(true)
   domFragment.querySelector('.taskDate').textContent = date
@@ -63,24 +65,22 @@ export function createTaskUsingTemplate(date, text, state, group) {
   containerElement.appendChild(domFragment)
 }
 
-export function deleteTask(task) {}
-
-export function moveTask(origin, end, task) {}
-
 // Add group
 export function createGroupUsingTemplate(groupName) {
   const containerElement = document.querySelector('.groupsContainer')
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
   domFragment.querySelector('h2').textContent = groupName
-  containerElement.appendChild(domFragment) 
-  const field = document.querySelector('.addTaskField')
-  field.addEventListener('keypress', handleAddTaskFieldEnter)
-}
+  domFragment.querySelector('.tasksContainer').id = groupName
 
+  domFragment.querySelector('.addTaskField').id = groupID
+  const field = domFragment.querySelector('.addTaskField')
+  field.addEventListener('keypress', (event) => handleAddTaskFieldEnter(event, groupID));
+  containerElement.appendChild(domFragment)
+  groupID ++
+}
 
 window.addEventListener('load', (event) => {
   createGroupUsingTemplate('First Group')
   createGroupUsingTemplate('Second Group')
-
-});
+})
