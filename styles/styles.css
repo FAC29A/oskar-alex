@@ -174,18 +174,18 @@ p, .taskText, .taskText:focus, .taskText:hover{
     margin-bottom: 1rem;
   }
 
-  #moveToCompleted{
+  .moveToCompleted{
     background-image: url('../images/check.png');
     background-color: transparent;
-    height: 3rem;
-    width: 3rem;
+    height:auto;
+    width: auto;
     background-size: cover;
     background-repeat: no-repeat;
     border: none;
     outline: none;
     padding: 10px 20px;
     cursor: pointer;
-    margin-bottom: 1rem;
+    margin: 0;
 
   }
   
