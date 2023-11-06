@@ -173,6 +173,21 @@ p, .taskText, .taskText:focus, .taskText:hover{
     cursor: pointer;
     margin-bottom: 1rem;
   }
+
+  #moveToCompleted{
+    background-image: url('../images/check.png');
+    background-color: transparent;
+    height: 3rem;
+    width: 3rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+
+  }
   
   .deleteGroupButton{
     cursor: pointer;
