@@ -29,6 +29,7 @@ h1 {font-family: var(--font);
     margin-right:auto;
     background-color: transparent;
     border-style: none;
+    width: 100%;
 }
 
 .groupsContainer {
