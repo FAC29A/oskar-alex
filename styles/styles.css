@@ -24,9 +24,11 @@ h1 {font-size: xx-large;
     width: fit-content;
 }
 
-h2 {font-size: large;
-    margin-top:0.21rem;
+h2 {font-size: x-large;
+    margin-top:0;
+    margin-bottom: 0.5rem;
     text-align: center;
+    font-weight: normal;
 }
 
 .groupTitle {
@@ -104,13 +106,6 @@ h2 {font-size: large;
     background-color: var(--completedColour);
 }
 
-#bin {
-    display:block;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 ul{
     padding: 0; 
 }
@@ -133,6 +128,14 @@ ul{
     transform: scale(1.03);
     box-shadow: var(--box-shadow-hard);
     background-color: rgb(275,275,250);
+}
+
+.taskItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2rem;
+
+
 }
 
 .addTaskField {

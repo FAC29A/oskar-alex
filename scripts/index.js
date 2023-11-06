@@ -77,15 +77,16 @@ export function createGroupUsingTemplate(groupName, color) {
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
 
-  // Define the group title and set tabindex
-  const groupTitle = domFragment.querySelector('.groupTitle');
+  
+
+  // Define the group title
+  const groupTitle = domFragment.querySelector('.groupTitle')
 
   if (groupName) {
-    domFragment.querySelector('.groupTitle').value = groupName
-    domFragment
-      .querySelector('.groupTitle')
-      .setAttribute('tabindex', groupID.toString())
+    groupTitle.value = groupName
+    groupTitle.setAttribute('tabindex', groupID.toString())
   }
+
   domFragment.querySelector('.tasksContainer').id = groupName
   // Assign an ID with a string prefix followed by the groupID
   const tasksContainerId = `group-${groupID}`
@@ -104,8 +105,8 @@ export function createGroupUsingTemplate(groupName, color) {
   // After appending, set the focus on the group title
   // Using requestAnimationFrame to ensure the focus occurs after any reflows or repaints
   requestAnimationFrame(() => {
-    groupTitle.focus();
-  });
+    groupTitle.focus()
+  })
 
   const taskContainer = document.getElementById(tasksContainerId)
   if (color) {
@@ -113,6 +114,15 @@ export function createGroupUsingTemplate(groupName, color) {
   } else {
     taskContainer.style.backgroundColor = getRandomPastelColor()
   }
+
+  // Listen for Enter key on the group title input
+  groupTitle.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter' || event.code === 'Enter') {
+      event.preventDefault() // Prevent form submission or other default behavior
+      focusNextElement(event.target) // Move focus to the next element
+    }
+  })
+
   groupID++
 }
 
@@ -130,16 +140,7 @@ function deleteGroup(groupId) {
 window.addEventListener('load', (event) => {
   deafultGroups.forEach((element) => {
     createGroupUsingTemplate(element.groupName, element.backgroundColour)
-    
   })
-
-  /*// Select all elements with the class 'groupTitle'
-  const groupTitles = document.querySelectorAll('.groupTitle')
-  // Check if there are any elements returned
-  if (groupTitles.length > 0) {
-    // Focus the last element in the NodeList
-    groupTitles[groupTitles.length - 1].focus()
-  }*/
 })
 
 const newGroupButton = document.getElementById('createGroupButton')
@@ -154,3 +155,20 @@ function toggleSidebar() {
 }
 
 document.getElementById('sidebar').addEventListener('click', toggleSidebar)
+
+//Enter works like "tab"
+function focusNextElement(element) {
+  // Get all focusable elements
+  const focusableElements = Array.from(
+    document.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+  )
+  const index = focusableElements.indexOf(element)
+
+  if (index > -1) {
+    // Focus the next focusable element; if there's no next element, focus the first one
+    const nextElement = focusableElements[index + 1] || focusableElements[0]
+    nextElement.focus()
+  }
+}
