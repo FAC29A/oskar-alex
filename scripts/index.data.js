@@ -1,8 +1,8 @@
 export const deafultGroups = [
     {groupName: "To-Do",
-    backgroundColour: "green"},
+    backgroundColour: "#D0E6FF"},
     {groupName: "In Progress",
-    backgroundColour: "yellow"},
+    backgroundColour: "#FFD580"},
     {groupName: "Completed",
-    backgroundColour: "red"}
+    backgroundColour: "#E7FFD6"}
 ]

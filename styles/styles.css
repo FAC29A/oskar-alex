@@ -32,6 +32,12 @@ h1 {font-family: var(--font);
     width: 100%;
 }
 
+.topBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .groupsContainer {
     display: flex;
     flex-direction:row;
@@ -103,10 +109,32 @@ ul{
     text-align: center;
 }
 
-.taskItem {
-    display:flex;
+.taskItem{
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    flex-wrap: nowrap;
 }
 
-p {
+p{
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin: 0;
 }
+
+#createGroupButton {
+    background-image: url('../images/newGroup.png');
+    background-color: transparent;
+    height: 3rem;
+    width: 3rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+  
