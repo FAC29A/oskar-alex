@@ -124,6 +124,13 @@ p{
     margin: 0;
 }
 
-
-button {
-}
+#createGroup {
+    background-image: url('../images/newGroup.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
