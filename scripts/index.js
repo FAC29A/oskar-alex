@@ -61,7 +61,9 @@ export function createTaskUsingTemplate(text, group) {
   const template = document.querySelector('#taskTemplate')
   const domFragment = template.content.cloneNode(true)
   const field = domFragment.querySelector('.taskText')
+  const taskElement = domFragment.querySelector('.taskItem')
   field.value = text
+  taskElement.draggable = true
   // event listener to remove task
   field.addEventListener('keypress', function (event) {
     if (event.key === 'Enter' || event.code === 'Enter') {
