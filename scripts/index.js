@@ -1,9 +1,11 @@
 // Deafult Groups
 import { deafultGroups } from './index.data.js'
-let groupId = 1
-let taskId = 1;
 
-// Definition of functions and JS related with DOM manipulation
+// Unique Id Counters
+let groupId = 1
+let taskId = 1
+
+// --- Definition of functions and JS related with DOM manipulation ---
 
 // Helper function to format today's date in short format
 function getTodaysDateShortFormat() {
@@ -23,7 +25,6 @@ function getRandomPastelColor() {
 
   // Convert the RGB values to a hex color string
   const color = `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`
-
   return color
 }
 
@@ -44,10 +45,7 @@ function handleAddTaskFieldEnter(event, group) {
   if (event.key === 'Enter') {
     const inputField = event.target
     const taskText = inputField.value.trim()
-    const taskDate = getTodaysDateShortFormat()
-    const taskState = 'pending'
 
-    console.log(`TaskText ${taskText} group ${group}`)
     if (taskText && group)
       // Create and add the task
       createTaskUsingTemplate(taskText, group)
@@ -69,16 +67,16 @@ function deleteTask(event) {
 export function createTaskUsingTemplate(text, group) {
   const containerElement = document.querySelector(group)
   const taskList = containerElement.querySelector('#listToDo')
-  console.log(`containerElement ${containerElement}`)
-  console.log(`taskList ${taskList}`)
   const template = document.querySelector('#taskTemplate')
   const domFragment = template.content.cloneNode(true)
   const field = domFragment.querySelector('.taskText')
   const taskItem = domFragment.querySelector('.taskItem')
+
   field.value = text
-  taskItem.id = generateUniqueTaskID();
   taskItem.draggable = true
-  // Add drag event listeners
+  taskItem.id = generateUniqueTaskID();
+
+  // Add drag event listener
   taskItem.addEventListener('dragstart', handleDragStart);
 
   // event listener to remove task
@@ -87,6 +85,7 @@ export function createTaskUsingTemplate(text, group) {
       deleteTask(event)
     }
   })
+
   taskList.appendChild(domFragment)
 }
 
@@ -95,26 +94,24 @@ export function createGroupUsingTemplate(groupName, color) {
   const containerElement = document.querySelector('.groupsContainer')
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
-  const uniqueId = generateUniqueGroupID();
-
-  // Define the group title
   const groupTitle = domFragment.querySelector('.groupTitle')
+  const uniqueId = generateUniqueGroupID();
 
   if (groupName) {
     groupTitle.value = groupName
     groupTitle.setAttribute('tabindex', uniqueId.toString())
   }
 
-  // Assign an ID with a string prefix followed by the groupID
-  const tasksContainerId = uniqueId
-  domFragment.querySelector('.tasksContainer').id = tasksContainerId
+  // Delete Button
+  const deleteButton = domFragment.querySelector('.deleteGroupButton')
+  deleteButton.addEventListener('click', () => deleteGroup(uniqueId))
+
+  // Assign an ID
+  domFragment.querySelector('.tasksContainer').id = uniqueId
   domFragment.querySelector('.addTaskField').id = `addTaskField-${uniqueId}`
   const field = domFragment.querySelector('.addTaskField')
   field.addEventListener('keypress', (event) =>
-    handleAddTaskFieldEnter(event, `#${tasksContainerId}`))
-
-  const deleteButton = domFragment.querySelector('.deleteGroupButton')
-  deleteButton.addEventListener('click', () => deleteGroup(tasksContainerId))
+    handleAddTaskFieldEnter(event, `#${uniqueId}`))
 
   containerElement.appendChild(domFragment)
 
@@ -124,7 +121,8 @@ export function createGroupUsingTemplate(groupName, color) {
     groupTitle.focus()
   })
 
-  const taskContainer = document.getElementById(tasksContainerId);
+  // Set group colors
+  const taskContainer = document.getElementById(uniqueId);
 
   if (color) {
     taskContainer.style.backgroundColor = color
@@ -164,12 +162,13 @@ window.addEventListener('load', (event) => {
   })
 })
 
+// Add new group button
 const newGroupButton = document.getElementById('createGroupButton')
 newGroupButton.addEventListener('click', (event) => {
   createGroupUsingTemplate()
 })
 
-// Hide/show Sidebar
+// Sidebar
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar') // Access the specific element
   sidebar.classList.toggle('hidden')
@@ -195,7 +194,7 @@ function focusNextElement(element) {
   }
 }
 
-// Task Drag and Drop
+// Task Drag and Drop functions
 function handleDragStart(event) {
   event.dataTransfer.setData('text/plain', event.target.id); 
 }
