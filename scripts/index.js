@@ -134,8 +134,8 @@ export function createGroupUsingTemplate(groupName, color) {
     }
   })
 
+  // Attach dragover and drop event listeners to the tasks container
   if (taskContainer) {
-    // Attach dragover and drop event listeners to the tasks container
     taskContainer.addEventListener('dragover', handleDragOver);
     taskContainer.addEventListener('drop', handleDrop);
   }
@@ -181,6 +181,7 @@ function focusNextElement(element) {
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     )
   )
+  
   const index = focusableElements.indexOf(element)
 
   if (index > -1) {
@@ -190,31 +191,21 @@ function focusNextElement(element) {
   }
 }
 
-// Drag and Drop
+// Task Drag and Drop
 function handleDragStart(event) {
-  console.log('Drag');
-  event.dataTransfer.setData('text/plain', event.target.id);
-  
+  event.dataTransfer.setData('text/plain', event.target.id); 
 }
 
 function handleDragOver(event) {
   event.preventDefault();
-  console.log('Drag Over')
 }
 
 function handleDrop(event) {
-  console.log('Drop');
   event.preventDefault();
-  
   const taskId = event.dataTransfer.getData('text/plain');
   const draggedTask = document.getElementById(taskId);
-  
-  console.log('taskId:', taskId);
-  console.log('draggedTask:', draggedTask);
-  
   // Get the target group ID using event.target
   const targetGroup = event.target.closest('.tasksContainer');
-  console.log(targetGroup)
   // Check if a valid target group is found
   if (targetGroup) {
     // Move the task to the target group
