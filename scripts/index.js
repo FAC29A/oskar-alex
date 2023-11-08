@@ -204,7 +204,6 @@ newGroupButton.addEventListener('click', (event) => {
 // Hide/show Sidebar
 // Assuming the sidebar starts out as expanded
 const sidebar = document.getElementById('sidebar')
-sidebar.classList.add('sidebar-expanded')
 
 // The toggle button
 const toggleBtn = document.getElementById('toggleSidebar')

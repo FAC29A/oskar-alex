@@ -58,7 +58,7 @@ h2 {
 }
 
 .hidden {
-  width: 20px !important;
+  width: 5rem !important;
 }
 
 #sidebar {
@@ -68,17 +68,14 @@ h2 {
     /* width: 30%;*/
     background-color: beige;
     box-shadow: var(--box-shadow-light);
-    padding: 1.5rem;
+    padding-left: 1.5rem;
     padding-top: 0.2rem;
+    padding-bottom: 0.5rem;
     padding-right: 0;
     overflow: hidden;
     transition: width 0.3s ease;
-
-}
-
-/* Updated hidden state */
-.hidden {
-    width: 50px;
+    border-radius: 0.2rem;
+    height: fit-content;
 }
 
 /* Since we're toggling the hidden class, we'll use one arrow image that indicates expansion */
@@ -88,17 +85,18 @@ h2 {
 
 .sidebar-toggle {
     position: absolute;
-    left: 0; /* Align to the left edge of the sidebar */
+    left: 0px; /* Align to the left edge of the sidebar */
     top: 50%; /* Center vertically */
     transform: translateY(-50%); 
-    cursor: pointer;
+   /* cursor: pointer;*/
     width: 1.5rem; /* Set a width for the toggle area */
     height: 1.5rem; /* Set a height for the toggle area */
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 1);
-    border-radius: 50%; 
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 /* Ensure .sidebar-toggle is always visible */
@@ -144,6 +142,7 @@ h2 {
 ul{
     padding: 0;
     list-style-type: none;
+   
   
 }
 
@@ -239,18 +238,6 @@ p, .taskText, .taskText:focus, .taskText:hover{
   width: auto;
 }
 
-#sidebar {
-  display: block;
-  background-color: beige;
-  box-shadow: var(--box-shadow-light);
-  border-radius: 0.2rem;
-  padding: 0.4rem;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-  border-radius: 0.2rem;
-  height: auto;
-}
 
 #clearButton {
   position: absolute;
