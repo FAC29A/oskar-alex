@@ -122,7 +122,7 @@ h2 {
   flex-direction: column;
   justify-content: space-between;
   min-width: 10rem;
-  max-width: 30%;
+  /* max-width: 30%;*/
   height: fit-content;
   min-height: 10rem;
   border-radius: 0.2rem;
