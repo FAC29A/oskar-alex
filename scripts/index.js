@@ -237,28 +237,6 @@ function focusNextElement(element) {
 function handleDragStart(event) {
   event.dataTransfer.setData('text/plain', event.target.id)
 }
-/*
-function handleDragOver(event) {
-  event.preventDefault();
-}*/
-/*
-function handleDrop(event) {
-  event.preventDefault();
-  const taskId = event.dataTransfer.getData('text/plain');
-  const draggedTask = document.getElementById(taskId);
-  // Get the target group ID using event.target
-  const targetGroup = event.target.closest('.tasksContainer');
-  // Check if a valid target group is found
-  if (targetGroup) {
-    // Move the task to the target group
-    targetGroup.querySelector('#listToDo').appendChild(draggedTask);
-  }
-} */
-/*
-// Task Drag and Drop functions
-function handleDragStart(event) {
-  event.dataTransfer.setData('text/plain', event.target.id); 
-} */
 
 function handleDragOver(event) {
   event.preventDefault()
