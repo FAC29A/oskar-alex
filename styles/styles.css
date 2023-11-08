@@ -236,7 +236,7 @@ p, .taskText, .taskText:focus, .taskText:hover{
 }
 
 
-#clearButton {
+#clearTasksButton {
   position: absolute;
   bottom: 1rem;
   left: 50%;

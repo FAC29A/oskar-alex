@@ -214,6 +214,20 @@ toggleBtn.addEventListener('click', function () {
   sidebar.classList.toggle('hidden')
 })
 
+// Sidebar clear tasks button
+const clearTasksButton = document.getElementById('clearTasksButton');
+
+// Function to handle clearing tasks
+function clearTasks() {
+  // Get the completed tasks list
+  const completedList = document.getElementById('completedList');
+
+  // Remove all tasks from the completed tasks list
+  completedList.innerHTML = '';
+}
+
+clearTasksButton.addEventListener('click', clearTasks);
+
 //Enter works like "tab"
 function focusNextElement(element) {
   // Get all focusable elements
