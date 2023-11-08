@@ -5,18 +5,6 @@ import { deafultGroups } from './index.data.js'
 let groupId = 1
 let taskId = 1
 
-// --- Definition of functions and JS related with DOM manipulation ---
-
-// Helper function to format today's date in short format
-function getTodaysDateShortFormat() {
-  const today = new Date()
-  return today.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-  })
-}
-
 function getRandomPastelColor() {
   // Generate a random RGB value with a higher lightness
   const r = Math.floor(Math.random() * 128 + 127) // from 127 to 255
@@ -29,15 +17,15 @@ function getRandomPastelColor() {
 }
 
 function generateUniqueTaskID() {
-  const uniqueTaskID = `task-${taskId}`;
-  taskId++;
-  return uniqueTaskID;
+  const uniqueTaskID = `task-${taskId}`
+  taskId++
+  return uniqueTaskID
 }
 
 function generateUniqueGroupID() {
-  const uniqueGroupID = `group-${groupId}`;
-  groupId++;
-  return uniqueGroupID;
+  const uniqueGroupID = `group-${groupId}`
+  groupId++
+  return uniqueGroupID
 }
 
 // Function to handle the 'Enter' key in addTaskFields
@@ -83,10 +71,10 @@ export function createTaskUsingTemplate(text, group) {
 
   field.value = text
   taskItem.draggable = true
-  taskItem.id = generateUniqueTaskID();
+  taskItem.id = generateUniqueTaskID()
 
   // Add drag event listener
-  taskItem.addEventListener('dragstart', handleDragStart);
+  taskItem.addEventListener('dragstart', handleDragStart)
 
   // event listener to remove task
   field.addEventListener('keypress', function (event) {
@@ -95,31 +83,30 @@ export function createTaskUsingTemplate(text, group) {
     }
   })
 
-   // event listener for moveToCompleted
-   const moveToCompletedButton = domFragment.querySelector('.moveToCompleted');
-   moveToCompletedButton.addEventListener('click', handleMoveToCompleted);
- 
-   taskList.appendChild(domFragment);
- }
+  // event listener for moveToCompleted
+  const moveToCompletedButton = domFragment.querySelector('.moveToCompleted')
+  moveToCompletedButton.addEventListener('click', handleMoveToCompleted)
+
+  taskList.appendChild(domFragment)
+}
 
 // Handle move to completed logic
 function handleMoveToCompleted(event) {
   // Retrieve the task text from the input field
-  const taskItem = event.target.closest('.taskItem');
-  const taskText = taskItem.querySelector('.taskText').value;
+  const taskItem = event.target.closest('.taskItem')
+  const taskText = taskItem.querySelector('.taskText').value
 
   // Create a new list item for the completed list
-  const completedTask = document.createElement('li');
-  completedTask.textContent = taskText; // Set the text of the completed task
+  const completedTask = document.createElement('li')
+  completedTask.textContent = taskText // Set the text of the completed task
 
   // Select the completed list and append the new list item
-  const completedList = document.getElementById('completedList');
-  completedList.appendChild(completedTask);
+  const completedList = document.getElementById('completedList')
+  completedList.appendChild(completedTask)
 
   // Remove the task item from its current list
-  taskItem.remove();
+  taskItem.remove()
 }
-
 
 // Add group
 export function createGroupUsingTemplate(groupName, color) {
@@ -129,7 +116,7 @@ export function createGroupUsingTemplate(groupName, color) {
 
   // Define the group title
   const groupTitle = domFragment.querySelector('.groupTitle')
-  const uniqueId = generateUniqueGroupID();
+  const uniqueId = generateUniqueGroupID()
 
   if (groupName) {
     groupTitle.value = groupName
@@ -145,11 +132,8 @@ export function createGroupUsingTemplate(groupName, color) {
   domFragment.querySelector('.addTaskField').id = `addTaskField-${uniqueId}`
   const field = domFragment.querySelector('.addTaskField')
   field.addEventListener('keypress', (event) =>
-    handleAddTaskFieldEnter(event, `#${tasksContainerId}`)
+    handleAddTaskFieldEnter(event, `#${uniqueId}`)
   )
-
-  const deleteButton = domFragment.querySelector('.deleteGroupButton')
-  deleteButton.addEventListener('click', () => deleteGroup(tasksContainerId))
 
   // Find the addTaskField and addTaskButton inside the domFragment
   const addTaskField = domFragment.querySelector('.addTaskField')
@@ -158,7 +142,7 @@ export function createGroupUsingTemplate(groupName, color) {
   // Add event listener to the addTaskButton
   addTaskButton.addEventListener('click', () => {
     // Call the function to add the task to the group
-    addTaskToGroup(addTaskField.value.trim(), `#${tasksContainerId}`)
+    addTaskToGroup(addTaskField.value.trim(), `#${uniqueId}`)
     addTaskField.value = '' // Clear the input field after adding the task
   })
 
@@ -171,7 +155,7 @@ export function createGroupUsingTemplate(groupName, color) {
   })
 
   // Set group colors
-  const taskContainer = document.getElementById(uniqueId);
+  const taskContainer = document.getElementById(uniqueId)
 
   if (color) {
     taskContainer.style.backgroundColor = color
@@ -189,8 +173,8 @@ export function createGroupUsingTemplate(groupName, color) {
 
   // Attach dragover and drop event listeners to the tasks container
   if (taskContainer) {
-    taskContainer.addEventListener('dragover', handleDragOver);
-    taskContainer.addEventListener('drop', handleDrop);
+    taskContainer.addEventListener('dragover', handleDragOver)
+    taskContainer.addEventListener('drop', handleDrop)
   }
 }
 
@@ -200,7 +184,7 @@ function deleteGroup(groupId) {
   if (groupElement) {
     groupElement.remove() // Removes the whole group container
   } else {
-    console.error(`No element found with ID ${groupId}`);
+    console.error(`No element found with ID ${groupId}`)
   }
 }
 
@@ -216,21 +200,20 @@ const newGroupButton = document.getElementById('createGroupButton')
 newGroupButton.addEventListener('click', (event) => {
   createGroupUsingTemplate()
 })
- 
+
 // Hide/show Sidebar
 // Assuming the sidebar starts out as expanded
-const sidebar = document.getElementById('sidebar');
-sidebar.classList.add('sidebar-expanded');
+const sidebar = document.getElementById('sidebar')
+sidebar.classList.add('sidebar-expanded')
 
 // The toggle button
-const toggleBtn = document.getElementById('toggleSidebar');
+const toggleBtn = document.getElementById('toggleSidebar')
 
 // Event listener for the toggle button
-toggleBtn.addEventListener('click', function() {
+toggleBtn.addEventListener('click', function () {
   // Toggle the 'hidden' class on sidebar
-  sidebar.classList.toggle('hidden');
-});
-
+  sidebar.classList.toggle('hidden')
+})
 
 //Enter works like "tab"
 function focusNextElement(element) {
@@ -240,7 +223,7 @@ function focusNextElement(element) {
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     )
   )
-  
+
   const index = focusableElements.indexOf(element)
 
   if (index > -1) {
@@ -248,19 +231,17 @@ function focusNextElement(element) {
     const nextElement = focusableElements[index + 1] || focusableElements[0]
     nextElement.focus()
   }
-} 
-
-
+}
 
 // Task Drag and Drop functions
 function handleDragStart(event) {
-  event.dataTransfer.setData('text/plain', event.target.id); 
+  event.dataTransfer.setData('text/plain', event.target.id)
 }
-
+/*
 function handleDragOver(event) {
   event.preventDefault();
-}
-
+}*/
+/*
 function handleDrop(event) {
   event.preventDefault();
   const taskId = event.dataTransfer.getData('text/plain');
@@ -272,26 +253,26 @@ function handleDrop(event) {
     // Move the task to the target group
     targetGroup.querySelector('#listToDo').appendChild(draggedTask);
   }
-}
-
+} */
+/*
 // Task Drag and Drop functions
 function handleDragStart(event) {
   event.dataTransfer.setData('text/plain', event.target.id); 
-}
+} */
 
 function handleDragOver(event) {
-  event.preventDefault();
+  event.preventDefault()
 }
 
 function handleDrop(event) {
-  event.preventDefault();
-  const taskId = event.dataTransfer.getData('text/plain');
-  const draggedTask = document.getElementById(taskId);
+  event.preventDefault()
+  const taskId = event.dataTransfer.getData('text/plain')
+  const draggedTask = document.getElementById(taskId)
   // Get the target group ID using event.target
-  const targetGroup = event.target.closest('.tasksContainer');
+  const targetGroup = event.target.closest('.tasksContainer')
   // Check if a valid target group is found
   if (targetGroup) {
     // Move the task to the target group
-    targetGroup.querySelector('#listToDo').appendChild(draggedTask);
+    targetGroup.querySelector('#listToDo').appendChild(draggedTask)
   }
 }
