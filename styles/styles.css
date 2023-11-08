@@ -1,176 +1,184 @@
 /*Global variables*/
 :root {
-    --medium-dark-grey: rgba(37, 37, 37, 0.719);
-    --font:'Roboto', sans-serif;
+  --medium-dark-grey: rgba(37, 37, 37, 0.719);
+  --font: 'Roboto', sans-serif;
 
-    --toDoColour: #a3cef1;
-    --inProgressColour: #ffca28;
-    --completedColour:  #81c784;
+  --toDoColour: #a3cef1;
+  --inProgressColour: #ffca28;
+  --completedColour: #81c784;
 
-    --box-shadow-light: 0 0 1.25rem rgba(0,0,0,0.58);
-    --box-shadow-hard: 0 0 3.75rem rgba(0,0,0,0.9);
-} 
+  --box-shadow-light: 0 0 1.25rem rgba(0, 0, 0, 0.58);
+  --box-shadow-hard: 0 0 3.75rem rgba(0, 0, 0, 0.9);
+}
 
 body {
-    margin: 3rem;
-    margin-right: 0;
-    padding: 0;
-    font-family: var(--font)
+  margin: 3rem;
+  margin-right: 0;
+  padding: 0;
+  font-family: var(--font);
 }
 
-h1 {font-size: xx-large;
-    margin-left:auto;
-    margin-right:auto;
-    width: fit-content;
+h1 {
+  font-size: xx-large;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
 }
 
-h2 {font-size: x-large;
-    margin-top:0;
-    margin-bottom: 0.5rem;
-    text-align: center;
-    font-weight: normal;
+h2 {
+  font-size: x-large;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-weight: normal;
 }
 
 .groupTitle {
-    font-size: large;
-    margin: 0;
-    margin-left:auto;
-    margin-right:auto;
-    background-color: transparent;
-    border: none;
-    width: 100%;
-    outline:none
+  font-size: large;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  outline: none;
 }
 
-.topBar{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.topBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .outerFlex {
-    display: flex;
-    justify-content: space-between;
-    gap:1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .hidden {
-    width: 20px !important;
+  width: 20px !important;
 }
 
 #sidebar {
-    display: block;
-    height: auto;
-    /* width: 30%;*/
-    background-color: beige;
-    box-shadow: var(--box-shadow-light);
-    padding: 0.5rem;
-    cursor: pointer;
-    overflow: hidden;
+  display: block;
+  height: auto;
+  /* width: 30%;*/
+  background-color: beige;
+  box-shadow: var(--box-shadow-light);
+  padding: 0.5rem;
+  cursor: pointer;
+  overflow: hidden;
 }
 .groupsContainer {
-    display: flex;
-    flex-grow: 1;
-    flex-direction:row;
-    justify-content: space-between;
-    align-content: flex-start;
-    flex-wrap: wrap;
-    gap: 1rem;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .tasksContainer {
-    display: flex;
-    flex: 1 1 calc(33.333% - 2rem); 
-    flex-direction: column;
-    min-width: 10rem;
-    height: fit-content;
-    border-radius: 0.2rem;
-    padding: 0.2rem;
-    box-shadow: var(--box-shadow-light);
+  display: flex;
+  flex: 1 1 calc(33.333% - 2rem);
+  flex-direction: column;
+  min-width: 10rem;
+  height: fit-content;
+  border-radius: 0.2rem;
+  padding: 0.2rem;
+  box-shadow: var(--box-shadow-light);
 }
 
-.listAndField{
-    display: flex;
-    flex-direction: column;
-    height: 100%; 
-    justify-content: space-between;
+.listAndField {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
 }
 
-ul{
-    padding: 0; 
+ul {
+  padding: 0;
 }
 
-.taskItem, .addTaskField {
-    display: flex;
-    justify-content: space-between;
-    font-size: medium;
-    border-style: none;
-    border-radius: 0.2rem;
-    list-style-type: none; 
-    padding: 0.2rem 0.2rem;
-    background-color: beige;
-    margin-bottom: 0.2rem;
-    box-shadow: var(--box-shadow-light);
-    transition: transform 0.15s ease;
-    outline: none;
+.taskItem,
+.addTaskField {
+  display: flex;
+  justify-content: space-between;
+  font-size: medium;
+  border-style: none;
+  border-radius: 0.2rem;
+  list-style-type: none;
+  padding: 0.2rem 0.2rem;
+  background-color: beige;
+  margin-bottom: 0.2rem;
+  box-shadow: var(--box-shadow-light);
+  transition: transform 0.15s ease;
+  outline: none;
 }
 
-.taskItem:focus, .taskItem:hover, .addTaskField:focus, .addTaskField:hover  {
-    transform: scale(1.03);
-    box-shadow: var(--box-shadow-hard);
-    background-color: rgb(275,275,250);
+.taskItem:focus,
+.taskItem:hover,
+.addTaskField:focus,
+.addTaskField:hover {
+  transform: scale(1.03);
+  box-shadow: var(--box-shadow-hard);
+  background-color: rgb(275, 275, 250);
 }
 
-.addTaskFieldAndButton{
-    display: flex;
-    width: 100%;
+.addTaskFieldAndButton {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .addTaskField {
-    text-align: center;
+  text-align: left;
+  width: 85%;
 }
 
-
-
-p, .taskText, .taskText:focus, .taskText:hover{
-    white-space: nowrap;
-    flex-wrap: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 0;
-    background-color: transparent;
-    border: none;
-    outline: none;
+p,
+.taskText,
+.taskText:focus,
+.taskText:hover {
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
 
 #createGroupButton {
-    background-image: url('../images/newGroup.png');
-    background-color: transparent;
-    height: 3rem;
-    width: 3rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: none;
-    outline: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-bottom: 1rem;
+  background-image: url('../images/newGroup.png');
+  background-color: transparent;
+  height: 3rem;
+  width: 3rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-bottom: 1rem;
 }
 
-.moveToCompleted{
-background-image: url('../images/check.png');
-background-color: transparent;
-height:1rem;
-width: 1rem;
-background-size: cover;
-background-repeat: no-repeat;
-border: none;
-outline: none;
-cursor: pointer;
-margin: 0;
-
+.moveToCompleted {
+  background-image: url('../images/check.png');
+  background-color: transparent;
+  height: 1rem;
+  width: 1rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
 }
 
-.deleteGroupButton{
-cursor: pointer;
+.deleteGroupButton {
+  cursor: pointer;
 }
