@@ -194,8 +194,6 @@ li {
   text-align: left;
   width: 85%;
 }
-/* No resolution needed */
-
 
 p, .taskText, .taskText:focus, .taskText:hover{
     white-space: nowrap;
