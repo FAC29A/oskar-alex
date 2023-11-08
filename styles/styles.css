@@ -1,176 +1,203 @@
 /*Global variables*/
 :root {
-    --medium-dark-grey: rgba(37, 37, 37, 0.719);
-    --font:'Roboto', sans-serif;
+  --medium-dark-grey: rgba(37, 37, 37, 0.719);
+  --font: 'Roboto', sans-serif;
 
-    --toDoColour: #a3cef1;
-    --inProgressColour: #ffca28;
-    --completedColour:  #81c784;
+  --toDoColour: #a3cef1;
+  --inProgressColour: #ffca28;
+  --completedColour: #81c784;
 
-    --box-shadow-light: 0 0 1.25rem rgba(0,0,0,0.58);
-    --box-shadow-hard: 0 0 3.75rem rgba(0,0,0,0.9);
-} 
+  --box-shadow-light: 0 0 1.25rem rgba(0, 0, 0, 0.58);
+  --box-shadow-hard: 0 0 3.75rem rgba(0, 0, 0, 0.9);
+}
 
 body {
-    margin: 3rem;
-    margin-right: 0;
-    padding: 0;
-    font-family: var(--font)
+  margin: 3rem;
+  margin-right: 0;
+  padding: 0;
+  font-family: var(--font);
 }
 
-h1 {font-size: xx-large;
-    margin-left:auto;
-    margin-right:auto;
-    width: fit-content;
+h1 {
+  font-size: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
 }
 
-h2 {font-size: x-large;
-    margin-top:0;
-    margin-bottom: 0.5rem;
-    text-align: center;
-    font-weight: normal;
+h2 {
+  font-size: 1.5em;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-weight: normal;
 }
 
 .groupTitle {
-    font-size: large;
-    margin: 0;
-    margin-left:auto;
-    margin-right:auto;
-    background-color: transparent;
-    border: none;
-    width: 100%;
-    outline:none
+  font-size: 1.5rem;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  outline: none;
 }
 
-.topBar{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.topBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .outerFlex {
-    display: flex;
-    justify-content: space-between;
-    gap:1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 70vh;
 }
 
 .hidden {
-    width: 20px !important;
+  width: 20px !important;
 }
 
-#sidebar {
-    display: block;
-    height: auto;
-    /* width: 30%;*/
-    background-color: beige;
-    box-shadow: var(--box-shadow-light);
-    padding: 0.5rem;
-    cursor: pointer;
-    overflow: hidden;
-}
 .groupsContainer {
-    display: flex;
-    flex-grow: 1;
-    flex-direction:row;
-    justify-content: space-between;
-    align-content: flex-start;
-    flex-wrap: wrap;
-    gap: 1rem;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .tasksContainer {
-    display: flex;
-    flex: 1 1 calc(33.333% - 2rem); 
-    flex-direction: column;
-    min-width: 10rem;
-    height: fit-content;
-    border-radius: 0.2rem;
-    padding: 0.2rem;
-    box-shadow: var(--box-shadow-light);
+  display: block;
+  flex: 1 1 calc(33.333% - 2rem);
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 10rem;
+  max-width: 30%;
+  height: fit-content;
+  min-height: 10rem;
+  border-radius: 0.2rem;
+  padding: 0.4rem;
+  box-shadow: var(--box-shadow-light);
 }
 
-.listAndField{
-    display: flex;
-    flex-direction: column;
-    height: 100%; 
-    justify-content: space-between;
+.groupTitle {
+  height: 1.5rem;
 }
 
-ul{
-    padding: 0; 
+.listAndField {
+  display: flex;
+  flex-direction: column;
+  min-height: 8rem;
+  justify-content: space-between;
 }
 
-.taskItem, .addTaskField {
-    display: flex;
-    justify-content: space-between;
-    font-size: medium;
-    border-style: none;
-    border-radius: 0.2rem;
-    list-style-type: none; 
-    padding: 0.2rem 0.2rem;
-    background-color: beige;
-    margin-bottom: 0.2rem;
-    box-shadow: var(--box-shadow-light);
-    transition: transform 0.15s ease;
-    outline: none;
+ul {
+  padding: 0;
 }
 
-.taskItem:focus, .taskItem:hover, .addTaskField:focus, .addTaskField:hover  {
-    transform: scale(1.03);
-    box-shadow: var(--box-shadow-hard);
-    background-color: rgb(275,275,250);
+.taskItem,
+.addTaskField {
+  display: flex;
+  justify-content: space-between;
+  font-size: medium;
+  border-style: none;
+  border-radius: 0.2rem;
+  list-style-type: none;
+  padding: 0.2rem 0.2rem;
+  background-color: beige;
+  margin-bottom: 0.2rem;
+  box-shadow: var(--box-shadow-light);
+  transition: transform 0.15s ease;
+  outline: none;
 }
 
-.addTaskFieldAndButton{
-    display: flex;
-    width: 100%;
+.taskItem:focus,
+.taskItem:hover,
+.addTaskField:focus,
+.addTaskField:hover {
+  transform: scale(1.03);
+  box-shadow: var(--box-shadow-hard);
+  background-color: rgb(275, 275, 250);
+}
+
+.addTaskFieldAndButton {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .addTaskField {
-    text-align: center;
+  text-align: left;
+  width: 85%;
 }
 
-
-
-p, .taskText, .taskText:focus, .taskText:hover{
-    white-space: nowrap;
-    flex-wrap: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 0;
-    background-color: transparent;
-    border: none;
-    outline: none;
+p,
+.taskText,
+.taskText:focus,
+.taskText:hover {
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
 
 #createGroupButton {
-    background-image: url('../images/newGroup.png');
-    background-color: transparent;
-    height: 3rem;
-    width: 3rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: none;
-    outline: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-bottom: 1rem;
+  background-image: url('../images/newGroup.png');
+  background-color: transparent;
+  height: 3rem;
+  width: 3rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-bottom: 1rem;
 }
 
-.moveToCompleted{
-background-image: url('../images/check.png');
-background-color: transparent;
-height:1rem;
-width: 1rem;
-background-size: cover;
-background-repeat: no-repeat;
-border: none;
-outline: none;
-cursor: pointer;
-margin: 0;
-
+.moveToCompleted {
+  background-image: url('../images/check.png');
+  background-color: transparent;
+  height: 1rem;
+  width: 1rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
 }
 
-.deleteGroupButton{
-cursor: pointer;
+.deleteGroupButton {
+  cursor: pointer;
+  height: 1.5rem;
+  width: auto;
+}
+
+#sidebar {
+  display: block;
+  background-color: beige;
+  box-shadow: var(--box-shadow-light);
+  border-radius: 0.2rem;
+  padding: 0.4rem;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+#clearButton {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1.5rem;
 }
