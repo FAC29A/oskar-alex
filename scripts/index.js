@@ -63,10 +63,19 @@ function deleteTask(event) {
   }
 }
 
-// Add task to group
+// Function to add a task to the group
+export function addTaskToGroup(taskText, groupId) {
+  if (taskText && groupId) {
+    // Create and add the task
+    createTaskUsingTemplate(taskText, groupId)
+  }
+}
+
+// Create task
 export function createTaskUsingTemplate(text, group) {
   const containerElement = document.querySelector(group)
   const taskList = containerElement.querySelector('#listToDo')
+
   const template = document.querySelector('#taskTemplate')
   const domFragment = template.content.cloneNode(true)
   const field = domFragment.querySelector('.taskText')
@@ -86,14 +95,39 @@ export function createTaskUsingTemplate(text, group) {
     }
   })
 
-  taskList.appendChild(domFragment)
+   // event listener for moveToCompleted
+   const moveToCompletedButton = domFragment.querySelector('.moveToCompleted');
+   moveToCompletedButton.addEventListener('click', handleMoveToCompleted);
+ 
+   taskList.appendChild(domFragment);
+ }
+
+// Handle move to completed logic
+function handleMoveToCompleted(event) {
+  // Retrieve the task text from the input field
+  const taskItem = event.target.closest('.taskItem');
+  const taskText = taskItem.querySelector('.taskText').value;
+
+  // Create a new list item for the completed list
+  const completedTask = document.createElement('li');
+  completedTask.textContent = taskText; // Set the text of the completed task
+
+  // Select the completed list and append the new list item
+  const completedList = document.getElementById('completedList');
+  completedList.appendChild(completedTask);
+
+  // Remove the task item from its current list
+  taskItem.remove();
 }
+
 
 // Add group
 export function createGroupUsingTemplate(groupName, color) {
   const containerElement = document.querySelector('.groupsContainer')
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
+
+  // Define the group title
   const groupTitle = domFragment.querySelector('.groupTitle')
   const uniqueId = generateUniqueGroupID();
 
@@ -111,7 +145,22 @@ export function createGroupUsingTemplate(groupName, color) {
   domFragment.querySelector('.addTaskField').id = `addTaskField-${uniqueId}`
   const field = domFragment.querySelector('.addTaskField')
   field.addEventListener('keypress', (event) =>
-    handleAddTaskFieldEnter(event, `#${uniqueId}`))
+    handleAddTaskFieldEnter(event, `#${tasksContainerId}`)
+  )
+
+  const deleteButton = domFragment.querySelector('.deleteGroupButton')
+  deleteButton.addEventListener('click', () => deleteGroup(tasksContainerId))
+
+  // Find the addTaskField and addTaskButton inside the domFragment
+  const addTaskField = domFragment.querySelector('.addTaskField')
+  const addTaskButton = domFragment.querySelector('.addTaskButton')
+
+  // Add event listener to the addTaskButton
+  addTaskButton.addEventListener('click', () => {
+    // Call the function to add the task to the group
+    addTaskToGroup(addTaskField.value.trim(), `#${tasksContainerId}`)
+    addTaskField.value = '' // Clear the input field after adding the task
+  })
 
   containerElement.appendChild(domFragment)
 
@@ -167,14 +216,21 @@ const newGroupButton = document.getElementById('createGroupButton')
 newGroupButton.addEventListener('click', (event) => {
   createGroupUsingTemplate()
 })
+ 
+// Hide/show Sidebar
+// Assuming the sidebar starts out as expanded
+const sidebar = document.getElementById('sidebar');
+sidebar.classList.add('sidebar-expanded');
 
-// Sidebar
-function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar') // Access the specific element
-  sidebar.classList.toggle('hidden')
-}
+// The toggle button
+const toggleBtn = document.getElementById('toggleSidebar');
 
-document.getElementById('sidebar').addEventListener('click', toggleSidebar)
+// Event listener for the toggle button
+toggleBtn.addEventListener('click', function() {
+  // Toggle the 'hidden' class on sidebar
+  sidebar.classList.toggle('hidden');
+});
+
 
 //Enter works like "tab"
 function focusNextElement(element) {
@@ -191,6 +247,30 @@ function focusNextElement(element) {
     // Focus the next focusable element; if there's no next element, focus the first one
     const nextElement = focusableElements[index + 1] || focusableElements[0]
     nextElement.focus()
+  }
+} 
+
+
+
+// Task Drag and Drop functions
+function handleDragStart(event) {
+  event.dataTransfer.setData('text/plain', event.target.id); 
+}
+
+function handleDragOver(event) {
+  event.preventDefault();
+}
+
+function handleDrop(event) {
+  event.preventDefault();
+  const taskId = event.dataTransfer.getData('text/plain');
+  const draggedTask = document.getElementById(taskId);
+  // Get the target group ID using event.target
+  const targetGroup = event.target.closest('.tasksContainer');
+  // Check if a valid target group is found
+  if (targetGroup) {
+    // Move the task to the target group
+    targetGroup.querySelector('#listToDo').appendChild(draggedTask);
   }
 }
 

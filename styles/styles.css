@@ -61,6 +61,51 @@ h2 {
   width: 20px !important;
 }
 
+#sidebar {
+    display: block;
+    height: auto;
+    position: relative;
+    /* width: 30%;*/
+    background-color: beige;
+    box-shadow: var(--box-shadow-light);
+    padding: 1.5rem;
+    padding-top: 0.2rem;
+    padding-right: 0;
+    overflow: hidden;
+    transition: width 0.3s ease;
+
+}
+
+/* Updated hidden state */
+.hidden {
+    width: 50px;
+}
+
+/* Since we're toggling the hidden class, we'll use one arrow image that indicates expansion */
+.hidden .sidebar-toggle {
+    background-image: url('../images/left.png');
+}
+
+.sidebar-toggle {
+    position: absolute;
+    left: 0; /* Align to the left edge of the sidebar */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); 
+    cursor: pointer;
+    width: 1.5rem; /* Set a width for the toggle area */
+    height: 1.5rem; /* Set a height for the toggle area */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 1);
+    border-radius: 50%; 
+}
+
+/* Ensure .sidebar-toggle is always visible */
+#sidebar:not(.hidden) .sidebar-toggle {
+    background-image: url('../images/right.png'); /* Arrow pointing left when sidebar is not hidden */
+}
+
 .groupsContainer {
   display: flex;
   flex-grow: 1;
@@ -96,9 +141,19 @@ h2 {
   justify-content: space-between;
 }
 
-ul {
-  padding: 0;
+ul{
+    padding: 0;
+    list-style-type: none;
+  
 }
+
+li {
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 
 .taskItem,
 .addTaskField {
@@ -125,29 +180,32 @@ ul {
   background-color: rgb(275, 275, 250);
 }
 
-.addTaskFieldAndButton {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+.addTaskFieldAndButton{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.2rem;
 }
 
 .addTaskField {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 0;
   text-align: left;
   width: 85%;
 }
+/* No resolution needed */
 
-p,
-.taskText,
-.taskText:focus,
-.taskText:hover {
-  white-space: nowrap;
-  flex-wrap: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 0;
-  background-color: transparent;
-  border: none;
-  outline: none;
+
+p, .taskText, .taskText:focus, .taskText:hover{
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
 }
 
 #createGroupButton {
