@@ -34,7 +34,6 @@ function handleAddTaskFieldEnter(event, group) {
     const taskDate = getTodaysDateShortFormat()
     const taskState = 'pending'
 
-    console.log(`TaskText ${taskText} group ${group}`)
     if (taskText && group)
       // Create and add the task
       createTaskUsingTemplate(taskText, group)
@@ -52,32 +51,62 @@ function deleteTask(event) {
   }
 }
 
-// Add task to group
+// Function to add a task to the group
+export function addTaskToGroup(taskText, groupId) {
+  if (taskText && groupId) {
+    // Create and add the task
+    createTaskUsingTemplate(taskText, groupId)
+  }
+}
+
+// Create task
 export function createTaskUsingTemplate(text, group) {
   const containerElement = document.querySelector(group)
   const taskList = containerElement.querySelector('#listToDo')
-  console.log(`containerElement ${containerElement}`)
-  console.log(`taskList ${taskList}`)
+
   const template = document.querySelector('#taskTemplate')
   const domFragment = template.content.cloneNode(true)
   const field = domFragment.querySelector('.taskText')
   field.value = text
+
   // event listener to remove task
   field.addEventListener('keypress', function (event) {
     if (event.key === 'Enter' || event.code === 'Enter') {
       deleteTask(event)
     }
   })
-  taskList.appendChild(domFragment)
+
+   // event listener for moveToCompleted
+   const moveToCompletedButton = domFragment.querySelector('.moveToCompleted');
+   moveToCompletedButton.addEventListener('click', handleMoveToCompleted);
+ 
+   taskList.appendChild(domFragment);
+ }
+
+// Handle move to completed logic
+function handleMoveToCompleted(event) {
+  // Retrieve the task text from the input field
+  const taskItem = event.target.closest('.taskItem');
+  const taskText = taskItem.querySelector('.taskText').value;
+
+  // Create a new list item for the completed list
+  const completedTask = document.createElement('li');
+  completedTask.textContent = taskText; // Set the text of the completed task
+
+  // Select the completed list and append the new list item
+  const completedList = document.getElementById('completedList');
+  completedList.appendChild(completedTask);
+
+  // Remove the task item from its current list
+  taskItem.remove();
 }
+
 
 // Add group
 export function createGroupUsingTemplate(groupName, color) {
   const containerElement = document.querySelector('.groupsContainer')
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
-
-  
 
   // Define the group title
   const groupTitle = domFragment.querySelector('.groupTitle')
@@ -99,6 +128,17 @@ export function createGroupUsingTemplate(groupName, color) {
 
   const deleteButton = domFragment.querySelector('.deleteGroupButton')
   deleteButton.addEventListener('click', () => deleteGroup(tasksContainerId))
+
+  // Find the addTaskField and addTaskButton inside the domFragment
+  const addTaskField = domFragment.querySelector('.addTaskField')
+  const addTaskButton = domFragment.querySelector('.addTaskButton')
+
+  // Add event listener to the addTaskButton
+  addTaskButton.addEventListener('click', () => {
+    // Call the function to add the task to the group
+    addTaskToGroup(addTaskField.value.trim(), `#${tasksContainerId}`)
+    addTaskField.value = '' // Clear the input field after adding the task
+  })
 
   containerElement.appendChild(domFragment)
 
