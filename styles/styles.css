@@ -61,13 +61,48 @@ h2 {font-size: x-large;
 #sidebar {
     display: block;
     height: auto;
+    position: relative;
     /* width: 30%;*/
     background-color: beige;
     box-shadow: var(--box-shadow-light);
-    padding: 0.5rem;
-    cursor: pointer;
+    padding: 1.5rem;
+    padding-top: 0.2rem;
+    padding-right: 0;
     overflow: hidden;
+    transition: width 0.3s ease;
+
 }
+
+/* Updated hidden state */
+.hidden {
+    width: 50px;
+}
+
+/* Since we're toggling the hidden class, we'll use one arrow image that indicates expansion */
+.hidden .sidebar-toggle {
+    background-image: url('../images/left.png');
+}
+
+.sidebar-toggle {
+    position: absolute;
+    left: 0; /* Align to the left edge of the sidebar */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); 
+    cursor: pointer;
+    width: 1.5rem; /* Set a width for the toggle area */
+    height: 1.5rem; /* Set a height for the toggle area */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 1);
+    border-radius: 50%; 
+}
+
+/* Ensure .sidebar-toggle is always visible */
+#sidebar:not(.hidden) .sidebar-toggle {
+    background-image: url('../images/right.png'); /* Arrow pointing left when sidebar is not hidden */
+}
+
 .groupsContainer {
     display: flex;
     flex-grow: 1;
@@ -97,8 +132,18 @@ h2 {font-size: x-large;
 }
 
 ul{
-    padding: 0; 
+    padding: 0;
+    list-style-type: none;
+  
 }
+
+li {
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 
 .taskItem, .addTaskField {
     display: flex;
@@ -124,10 +169,14 @@ ul{
 .addTaskFieldAndButton{
     display: flex;
     width: 100%;
+    justify-content: space-between;
+    gap: 0.2rem;
 }
 
 .addTaskField {
     text-align: center;
+    width: 100%;
+    margin-bottom: 0;
 }
 
 

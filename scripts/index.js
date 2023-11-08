@@ -187,14 +187,21 @@ const newGroupButton = document.getElementById('createGroupButton')
 newGroupButton.addEventListener('click', (event) => {
   createGroupUsingTemplate()
 })
-
+ 
 // Hide/show Sidebar
-function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar') // Access the specific element
-  sidebar.classList.toggle('hidden')
-}
+// Assuming the sidebar starts out as expanded
+const sidebar = document.getElementById('sidebar');
+sidebar.classList.add('sidebar-expanded');
 
-document.getElementById('sidebar').addEventListener('click', toggleSidebar)
+// The toggle button
+const toggleBtn = document.getElementById('toggleSidebar');
+
+// Event listener for the toggle button
+toggleBtn.addEventListener('click', function() {
+  // Toggle the 'hidden' class on sidebar
+  sidebar.classList.toggle('hidden');
+});
+
 
 //Enter works like "tab"
 function focusNextElement(element) {
@@ -211,4 +218,5 @@ function focusNextElement(element) {
     const nextElement = focusableElements[index + 1] || focusableElements[0]
     nextElement.focus()
   }
-}
+} 
+
