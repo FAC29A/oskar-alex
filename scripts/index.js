@@ -1,6 +1,7 @@
 // Deafult Groups
 import { deafultGroups } from './index.data.js'
 let groupID = 1
+let taskId = 1;
 
 // Definition of functions and JS related with DOM manipulation
 
@@ -24,6 +25,12 @@ function getRandomPastelColor() {
   const color = `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`
 
   return color
+}
+
+function generateUniqueTaskID() {
+  const uniqueTaskID = `task-${taskId}`;
+  taskId++;
+  return uniqueTaskID;
 }
 
 // Function to handle the 'Enter' key in addTaskFields
@@ -62,8 +69,8 @@ export function createTaskUsingTemplate(text, group) {
   const domFragment = template.content.cloneNode(true)
   const field = domFragment.querySelector('.taskText')
   const taskItem = domFragment.querySelector('.taskItem')
-  const tasksContainer = document.querySelector('#group-2')
   field.value = text
+  taskItem.id = generateUniqueTaskID();
   taskItem.draggable = true
   // Add drag event listeners
   taskItem.addEventListener('dragstart', handleDragStart);
@@ -117,7 +124,7 @@ export function createGroupUsingTemplate(groupName, color) {
     taskContainer.style.backgroundColor = color
   } else {
     taskContainer.style.backgroundColor = getRandomPastelColor()
-  };
+  }
 
   // Listen for Enter key on the group title input
   groupTitle.addEventListener('keydown', function (event) {
@@ -201,6 +208,9 @@ function handleDrop(event) {
   
   const taskId = event.dataTransfer.getData('text/plain');
   const draggedTask = document.getElementById(taskId);
+  
+  console.log('taskId:', taskId);
+  console.log('draggedTask:', draggedTask);
   
   // Get the target group ID using event.target
   const targetGroup = event.target.closest('.tasksContainer');
