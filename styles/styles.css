@@ -248,6 +248,7 @@ p, .taskText, .taskText:focus, .taskText:hover{
   cursor: pointer;
   overflow: hidden;
   position: relative;
+  border-radius: 0.2rem;
 }
 
 #clearButton {
