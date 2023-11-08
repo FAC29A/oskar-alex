@@ -61,9 +61,13 @@ export function createTaskUsingTemplate(text, group) {
   const template = document.querySelector('#taskTemplate')
   const domFragment = template.content.cloneNode(true)
   const field = domFragment.querySelector('.taskText')
-  const taskElement = domFragment.querySelector('.taskItem')
+  const taskItem = domFragment.querySelector('.taskItem')
+  const tasksContainer = document.querySelector('#group-2')
   field.value = text
-  taskElement.draggable = true
+  taskItem.draggable = true
+  // Add drag event listeners
+  taskItem.addEventListener('dragstart', handleDragStart);
+
   // event listener to remove task
   field.addEventListener('keypress', function (event) {
     if (event.key === 'Enter' || event.code === 'Enter') {
@@ -78,8 +82,6 @@ export function createGroupUsingTemplate(groupName, color) {
   const containerElement = document.querySelector('.groupsContainer')
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
-
-  
 
   // Define the group title
   const groupTitle = domFragment.querySelector('.groupTitle')
@@ -96,8 +98,7 @@ export function createGroupUsingTemplate(groupName, color) {
   domFragment.querySelector('.addTaskField').id = `addTaskField-${groupID}`
   const field = domFragment.querySelector('.addTaskField')
   field.addEventListener('keypress', (event) =>
-    handleAddTaskFieldEnter(event, `#${tasksContainerId}`)
-  )
+    handleAddTaskFieldEnter(event, `#${tasksContainerId}`))
 
   const deleteButton = domFragment.querySelector('.deleteGroupButton')
   deleteButton.addEventListener('click', () => deleteGroup(tasksContainerId))
@@ -110,12 +111,13 @@ export function createGroupUsingTemplate(groupName, color) {
     groupTitle.focus()
   })
 
-  const taskContainer = document.getElementById(tasksContainerId)
+  const taskContainer = document.getElementById(tasksContainerId);
+
   if (color) {
     taskContainer.style.backgroundColor = color
   } else {
     taskContainer.style.backgroundColor = getRandomPastelColor()
-  }
+  };
 
   // Listen for Enter key on the group title input
   groupTitle.addEventListener('keydown', function (event) {
@@ -124,6 +126,12 @@ export function createGroupUsingTemplate(groupName, color) {
       focusNextElement(event.target) // Move focus to the next element
     }
   })
+
+  if (taskContainer) {
+    // Attach dragover and drop event listeners to the tasks container
+    taskContainer.addEventListener('dragover', handleDragOver);
+    taskContainer.addEventListener('drop', handleDrop);
+  }
 
   groupID++
 }
@@ -134,7 +142,7 @@ function deleteGroup(groupId) {
   if (groupElement) {
     groupElement.remove() // Removes the whole group container
   } else {
-    console.error(`No element found with ID ${groupId}`)
+    console.error(`No element found with ID ${groupId}`);
   }
 }
 
@@ -172,5 +180,34 @@ function focusNextElement(element) {
     // Focus the next focusable element; if there's no next element, focus the first one
     const nextElement = focusableElements[index + 1] || focusableElements[0]
     nextElement.focus()
+  }
+}
+
+// Drag and Drop
+function handleDragStart(event) {
+  console.log('Drag');
+  event.dataTransfer.setData('text/plain', event.target.id);
+  
+}
+
+function handleDragOver(event) {
+  event.preventDefault();
+  console.log('Drag Over')
+}
+
+function handleDrop(event) {
+  console.log('Drop');
+  event.preventDefault();
+  
+  const taskId = event.dataTransfer.getData('text/plain');
+  const draggedTask = document.getElementById(taskId);
+  
+  // Get the target group ID using event.target
+  const targetGroup = event.target.closest('.tasksContainer');
+  console.log(targetGroup)
+  // Check if a valid target group is found
+  if (targetGroup) {
+    // Move the task to the target group
+    targetGroup.querySelector('#listToDo').appendChild(draggedTask);
   }
 }
