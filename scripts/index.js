@@ -1,6 +1,7 @@
 // Deafult Groups
 import { deafultGroups } from './index.data.js'
 let groupID = 1
+let taskId = 1;
 
 // Definition of functions and JS related with DOM manipulation
 
@@ -24,6 +25,12 @@ function getRandomPastelColor() {
   const color = `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`
 
   return color
+}
+
+function generateUniqueTaskID() {
+  const uniqueTaskID = `task-${taskId}`;
+  taskId++;
+  return uniqueTaskID;
 }
 
 // Function to handle the 'Enter' key in addTaskFields
@@ -61,7 +68,13 @@ export function createTaskUsingTemplate(text, group) {
   const template = document.querySelector('#taskTemplate')
   const domFragment = template.content.cloneNode(true)
   const field = domFragment.querySelector('.taskText')
+  const taskItem = domFragment.querySelector('.taskItem')
   field.value = text
+  taskItem.id = generateUniqueTaskID();
+  taskItem.draggable = true
+  // Add drag event listeners
+  taskItem.addEventListener('dragstart', handleDragStart);
+
   // event listener to remove task
   field.addEventListener('keypress', function (event) {
     if (event.key === 'Enter' || event.code === 'Enter') {
@@ -76,8 +89,6 @@ export function createGroupUsingTemplate(groupName, color) {
   const containerElement = document.querySelector('.groupsContainer')
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
-
-  
 
   // Define the group title
   const groupTitle = domFragment.querySelector('.groupTitle')
@@ -94,8 +105,7 @@ export function createGroupUsingTemplate(groupName, color) {
   domFragment.querySelector('.addTaskField').id = `addTaskField-${groupID}`
   const field = domFragment.querySelector('.addTaskField')
   field.addEventListener('keypress', (event) =>
-    handleAddTaskFieldEnter(event, `#${tasksContainerId}`)
-  )
+    handleAddTaskFieldEnter(event, `#${tasksContainerId}`))
 
   const deleteButton = domFragment.querySelector('.deleteGroupButton')
   deleteButton.addEventListener('click', () => deleteGroup(tasksContainerId))
@@ -108,7 +118,8 @@ export function createGroupUsingTemplate(groupName, color) {
     groupTitle.focus()
   })
 
-  const taskContainer = document.getElementById(tasksContainerId)
+  const taskContainer = document.getElementById(tasksContainerId);
+
   if (color) {
     taskContainer.style.backgroundColor = color
   } else {
@@ -123,6 +134,12 @@ export function createGroupUsingTemplate(groupName, color) {
     }
   })
 
+  // Attach dragover and drop event listeners to the tasks container
+  if (taskContainer) {
+    taskContainer.addEventListener('dragover', handleDragOver);
+    taskContainer.addEventListener('drop', handleDrop);
+  }
+
   groupID++
 }
 
@@ -132,7 +149,7 @@ function deleteGroup(groupId) {
   if (groupElement) {
     groupElement.remove() // Removes the whole group container
   } else {
-    console.error(`No element found with ID ${groupId}`)
+    console.error(`No element found with ID ${groupId}`);
   }
 }
 
@@ -164,11 +181,34 @@ function focusNextElement(element) {
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     )
   )
+  
   const index = focusableElements.indexOf(element)
 
   if (index > -1) {
     // Focus the next focusable element; if there's no next element, focus the first one
     const nextElement = focusableElements[index + 1] || focusableElements[0]
     nextElement.focus()
+  }
+}
+
+// Task Drag and Drop
+function handleDragStart(event) {
+  event.dataTransfer.setData('text/plain', event.target.id); 
+}
+
+function handleDragOver(event) {
+  event.preventDefault();
+}
+
+function handleDrop(event) {
+  event.preventDefault();
+  const taskId = event.dataTransfer.getData('text/plain');
+  const draggedTask = document.getElementById(taskId);
+  // Get the target group ID using event.target
+  const targetGroup = event.target.closest('.tasksContainer');
+  // Check if a valid target group is found
+  if (targetGroup) {
+    // Move the task to the target group
+    targetGroup.querySelector('#listToDo').appendChild(draggedTask);
   }
 }
