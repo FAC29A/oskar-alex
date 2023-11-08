@@ -1,6 +1,6 @@
 // Deafult Groups
 import { deafultGroups } from './index.data.js'
-let groupID = 1
+let groupId = 1
 let taskId = 1;
 
 // Definition of functions and JS related with DOM manipulation
@@ -31,6 +31,12 @@ function generateUniqueTaskID() {
   const uniqueTaskID = `task-${taskId}`;
   taskId++;
   return uniqueTaskID;
+}
+
+function generateUniqueGroupID() {
+  const uniqueGroupID = `group-${groupId}`;
+  groupId++;
+  return uniqueGroupID;
 }
 
 // Function to handle the 'Enter' key in addTaskFields
@@ -89,20 +95,20 @@ export function createGroupUsingTemplate(groupName, color) {
   const containerElement = document.querySelector('.groupsContainer')
   const template = document.querySelector('#groupTemplate')
   const domFragment = template.content.cloneNode(true)
+  const uniqueId = generateUniqueGroupID();
 
   // Define the group title
   const groupTitle = domFragment.querySelector('.groupTitle')
 
   if (groupName) {
     groupTitle.value = groupName
-    groupTitle.setAttribute('tabindex', groupID.toString())
+    groupTitle.setAttribute('tabindex', uniqueId.toString())
   }
 
-  domFragment.querySelector('.tasksContainer').id = groupName
   // Assign an ID with a string prefix followed by the groupID
-  const tasksContainerId = `group-${groupID}`
+  const tasksContainerId = uniqueId
   domFragment.querySelector('.tasksContainer').id = tasksContainerId
-  domFragment.querySelector('.addTaskField').id = `addTaskField-${groupID}`
+  domFragment.querySelector('.addTaskField').id = `addTaskField-${uniqueId}`
   const field = domFragment.querySelector('.addTaskField')
   field.addEventListener('keypress', (event) =>
     handleAddTaskFieldEnter(event, `#${tasksContainerId}`))
@@ -139,8 +145,6 @@ export function createGroupUsingTemplate(groupName, color) {
     taskContainer.addEventListener('dragover', handleDragOver);
     taskContainer.addEventListener('drop', handleDrop);
   }
-
-  groupID++
 }
 
 // Delete Group
