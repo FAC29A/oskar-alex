@@ -63,9 +63,8 @@ h2 {
 
 #sidebar {
     display: block;
-    height: auto;
     position: relative;
-    /* width: 30%;*/
+    width: 50%;
     background-color: beige;
     box-shadow: var(--box-shadow-light);
     padding-left: 1.5rem;
@@ -88,9 +87,8 @@ h2 {
     left: 0px; /* Align to the left edge of the sidebar */
     top: 50%; /* Center vertically */
     transform: translateY(-50%); 
-   /* cursor: pointer;*/
-    width: 1.5rem; /* Set a width for the toggle area */
-    height: 1.5rem; /* Set a height for the toggle area */
+    width: 1.5rem;
+    height: 1.5rem; 
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -106,7 +104,6 @@ h2 {
 
 .groupsContainer {
   display: flex;
-  flex-grow: 1;
   flex-direction: row;
   justify-content: space-between;
   align-content: flex-start;
@@ -141,9 +138,7 @@ h2 {
 
 ul{
     padding: 0;
-    list-style-type: none;
-   
-  
+    list-style-type: none;  
 }
 
 li {
