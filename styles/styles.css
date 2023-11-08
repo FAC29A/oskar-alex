@@ -22,6 +22,7 @@ h1 {
   font-size: 2rem;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 0;
   width: fit-content;
 }
 
@@ -64,7 +65,7 @@ h2 {
 #sidebar {
     display: block;
     position: relative;
-    width: 50%;
+    width: 200%;
     background-color: beige;
     box-shadow: var(--box-shadow-light);
     padding-left: 1.5rem;
@@ -75,6 +76,7 @@ h2 {
     transition: width 0.3s ease;
     border-radius: 0.2rem;
     height: fit-content;
+    min-height: 10rem;
 }
 
 /* Since we're toggling the hidden class, we'll use one arrow image that indicates expansion */
@@ -185,8 +187,7 @@ li {
     text-align: center;
     width: 100%;
     margin-bottom: 0;
-  text-align: left;
-  width: 85%;
+    text-align: left;
 }
 
 p, .taskText, .taskText:focus, .taskText:hover{
@@ -198,6 +199,7 @@ p, .taskText, .taskText:focus, .taskText:hover{
     background-color: transparent;
     border: none;
     outline: none;
+    width: 100%;
 }
 
 #createGroupButton {
