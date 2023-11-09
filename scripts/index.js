@@ -61,31 +61,31 @@ export function addTaskToGroup(taskText, groupId) {
 
 // Create task
 export function createTaskUsingTemplate(text, group) {
-  const containerElement = document.querySelector(group)
-  const taskList = containerElement.querySelector('#listToDo')
+  const containerElement = document.querySelector(group);
+  const taskList = containerElement.querySelector('#listToDo');
 
-  const template = document.querySelector('#taskTemplate')
-  const domFragment = template.content.cloneNode(true)
-  const field = domFragment.querySelector('.taskText')
-  const taskItem = domFragment.querySelector('.taskItem')
+  const template = document.querySelector('#taskTemplate');
+  const domFragment = template.content.cloneNode(true);
+  const field = domFragment.querySelector('.taskText');
+  const taskItem = domFragment.querySelector('.taskItem');
 
-  field.value = text
-  taskItem.draggable = true
-  taskItem.id = generateUniqueTaskID()
+  field.value = text;
+  taskItem.draggable = true;
+  taskItem.id = generateUniqueTaskID();
 
   // Add drag event listener
-  taskItem.addEventListener('dragstart', handleDragStart)
+  taskItem.addEventListener('dragstart', handleDragStart);
 
   // event listener to remove task
   field.addEventListener('keypress', function (event) {
     if (event.key === 'Enter' || event.code === 'Enter') {
-      deleteTask(event)
+      deleteTask(event);
     }
-  })
+  });
 
   // event listener for moveToCompleted
-  const moveToCompletedButton = domFragment.querySelector('.moveToCompleted')
-  moveToCompletedButton.addEventListener('click', handleMoveToCompleted)
+  const moveToCompletedButton = domFragment.querySelector('.moveToCompleted');
+  moveToCompletedButton.addEventListener('click', handleMoveToCompleted);
 
   taskList.appendChild(domFragment)
 }
