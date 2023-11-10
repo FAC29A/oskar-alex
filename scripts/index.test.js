@@ -51,7 +51,6 @@ test('Adding a task using Enter', async () => {
   })
 })
 
-
 test('Creating a new group adds it to the group list', async () => {
   await new Promise((resolve) => {
     setTimeout(() => {
@@ -77,4 +76,3 @@ test('Creating a new group adds it to the group list', async () => {
     }, 100);
   });
 });
-
