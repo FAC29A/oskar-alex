@@ -19,7 +19,7 @@ export function notEqual(actual, expected, message) {
 }
 
 export function test(name, testFunction) {
-  console.group(name)
+ // console.group(name)
   testFunction()
-  console.groupEnd(name)
+ // console.groupEnd(name)
 }
