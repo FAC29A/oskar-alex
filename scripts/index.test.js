@@ -1,5 +1,5 @@
 //Collection of tests to be performed
-import { equal, notEqual, test } from './test-helpers.js'
+import { equal, test } from './test-helpers.js'
 /*
 test('Submitting a new task adds it to the list', async () => {
   await new Promise((resolve) => {
