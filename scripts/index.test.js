@@ -1,5 +1,5 @@
 //Collection of tests to be performed
-import { equal, notEqual, test } from './test-helpers.js';
+import { equal, notEqual, test } from './test-helpers.js'
 /*
 test('Submitting a new task adds it to the list', async () => {
   await new Promise((resolve) => {
@@ -79,7 +79,7 @@ test('Creating a new group adds it to the group list', async () => {
 */
 test('Dragging a task from one group to another moves it correctly', async () => {
   await new Promise((resolve) => {
-    setTimeout(() => {
+    setTimeout(async () => {
       console.group('Dragging a task from one group to another');
 
       // Step 1: Identify the first two groups
@@ -95,25 +95,54 @@ test('Dragging a task from one group to another moves it correctly', async () =>
 
       setTimeout(() => {
         // Step 3: Simulate drag-and-drop
-        // This is a simplified version. In real scenarios, dispatch dragstart, dragend, and drop events
         const taskItem = firstGroup.querySelector('.taskItem');
-        console.log('Task Item:', taskItem); // Debugging line
-        const taskListSecondGroup = secondGroup.querySelector('#listToDo');
-        taskListSecondGroup.appendChild(taskItem);
+
+        // Check if the taskItem is found
+        if (!taskItem) {
+          console.error('Task item not found in the first group.');
+          return;
+        }
+
+        // Set the task item ID
+        const taskId = 'task-to-move';
+        taskItem.id = taskId;
+
+        // Simulate dragstart event on the taskItem
+        const dragStartEvent = new DragEvent('dragstart', {
+          dataTransfer: new DataTransfer(),
+        });
+        dragStartEvent.dataTransfer.setData('text/plain', taskId);
+        taskItem.dispatchEvent(dragStartEvent);
+
+        // Simulate dragover event on the second group
+        const dragOverEvent = new Event('dragover', { bubbles: true });
+        secondGroup.dispatchEvent(dragOverEvent);
+
+        // Simulate drop event on the second group
+        const dropEvent = new DragEvent('drop', {
+          dataTransfer: dragStartEvent.dataTransfer,
+        });
+        secondGroup.dispatchEvent(dropEvent);
 
         setTimeout(() => {
           // Step 4: Verify that the task is in the second group
-          const movedTask = taskListSecondGroup.lastElementChild;
-          // Adjusted to retrieve text from input field
-          const movedTaskText = movedTask ? movedTask.querySelector('.taskText').value.trim() : 'No task found';
+          const movedTask = secondGroup.querySelector(`#${taskId}`);
 
+          // Check if the movedTask is found
+          if (!movedTask) {
+            console.error('Task item not found in the second group after drop.');
+            return;
+          }
+
+          const movedTaskText = movedTask.querySelector('.taskText').value.trim();
           equal(movedTaskText, 'Task to Move');
 
           resolve(); // Resolve the promise after the test completes
 
           console.groupEnd('Dragging a task from one group to another');
         }, 100);
-      }, 100);
-    }, 100);
+      }, 1000); // Made it extra long to see the task moving
+    }, 200);
   });
 });
+
