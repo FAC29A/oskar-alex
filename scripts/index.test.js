@@ -78,6 +78,47 @@ test('Creating a new group adds it to the group list', async () => {
   });
 });
 */
+/*
+test('Sending a task to completed moves it to the completed section', async () => {
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      console.group('Sending a task to completed moves it to the completed section')
+
+      // Step 1: Create a new task
+      const inputField = document.querySelector('.addTaskField')
+      const addTaskButton = document.querySelector('.addTaskButton')
+      inputField.value = 'Task for Completion Test'
+      addTaskButton.click()
+
+      setTimeout(() => {
+        // Step 2: Find and click the 'send to complete' button for the new task
+        const taskList = document.querySelector('#listToDo')
+        const newTask = taskList.lastElementChild
+        const moveToCompletedButton = newTask.querySelector('.moveToCompleted')
+        moveToCompletedButton.click()
+
+        setTimeout(() => {
+          // Step 3: Check if the task is now in the completed section
+          const completedList = document.querySelector('#completedList')
+          const completedTask = completedList.lastElementChild
+
+          // Adjust this line based on the actual structure of the completed task
+          const completedTaskText = completedTask ? completedTask.textContent.trim() : null
+
+          equal(completedTaskText.trim(), 'Task for Completion Test')
+
+          inputField.value = '' // Clean up
+
+          resolve()
+
+          console.groupEnd('Sending a task to completed moves it to the completed section')
+        }, 100)
+      }, 100)
+    }, 100)
+  })
+}) */
+
+
 test('Dragging a task from one group to another moves it correctly', async () => {
   await new Promise((resolve) => {
     setTimeout(async () => {
@@ -146,44 +187,3 @@ test('Dragging a task from one group to another moves it correctly', async () =>
     }, 200);
   });
 });
-
-*/
-
-test('Sending a task to completed moves it to the completed section', async () => {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      console.group('Sending a task to completed moves it to the completed section')
-
-      // Step 1: Create a new task
-      const inputField = document.querySelector('.addTaskField')
-      const addTaskButton = document.querySelector('.addTaskButton')
-      inputField.value = 'Task for Completion Test'
-      addTaskButton.click()
-
-      setTimeout(() => {
-        // Step 2: Find and click the 'send to complete' button for the new task
-        const taskList = document.querySelector('#listToDo')
-        const newTask = taskList.lastElementChild
-        const moveToCompletedButton = newTask.querySelector('.moveToCompleted')
-        moveToCompletedButton.click()
-
-        setTimeout(() => {
-          // Step 3: Check if the task is now in the completed section
-          const completedList = document.querySelector('#completedList')
-          const completedTask = completedList.lastElementChild
-
-          // Adjust this line based on the actual structure of the completed task
-          const completedTaskText = completedTask ? completedTask.textContent.trim() : null
-
-          equal(completedTaskText.trim(), 'Task for Completion Test')
-
-          inputField.value = '' // Clean up
-
-          resolve()
-
-          console.groupEnd('Sending a task to completed moves it to the completed section')
-        }, 100)
-      }, 100)
-    }, 100)
-  })
-})
