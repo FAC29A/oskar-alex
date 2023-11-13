@@ -17,12 +17,6 @@ export function notEqual(actual, expected, message) {
 		console.error('Fail: ' + (message || defaultMessage))
 	}
 }
-/*
-export function test(name, testFunction) {
-	console.group(name)
-	testFunction()
-	console.groupEnd(name)
-}*/
 
 export function test(name, testFunction) {
   console.group(name);
