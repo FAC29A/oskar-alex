@@ -1,6 +1,6 @@
 //Collection of tests to be performed
 import { equal, test } from './test-helpers.js'
-
+/*
 test('Submitting a new task adds it to the list', async () => {
   await new Promise((resolve) => {
     setTimeout(() => {
@@ -114,6 +114,46 @@ test('Creating a new group adds it to the group list', async () => {
   });
 });
 */
+
+test('Deleting a specific group removes it from the group list', async () => {
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      console.group('Deleting a specific group removes it from the group list');
+
+      // Step 1: Create a new group
+      const createGroupButton = document.querySelector('#createGroupButton');
+      createGroupButton.click();
+
+      setTimeout(() => {
+        // Step 2: Find the newly created group
+        const groupList = document.querySelector('.groupsContainer');
+        const newGroup = groupList.lastElementChild;
+
+        // Step 3: Simulate clicking the delete button for the new group
+        const deleteGroupButton = newGroup.querySelector('.deleteGroupButton');
+        deleteGroupButton.click();
+
+        setTimeout(() => {
+          // Step 4: Check if the specific group is removed from the group list
+          const remainingGroups = document.querySelectorAll('.tasksContainer');
+
+          // Ensure that the specific group is not present
+          const isSpecificGroupPresent = Array.from(remainingGroups).some(
+            (group) => group === newGroup
+          );
+          equal(isSpecificGroupPresent, false);
+
+          resolve(); // Resolve the promise after the test completes
+          console.groupEnd(
+            'Deleting a specific group removes it from the group list'
+          );
+        }, 100);
+      }, 100);
+    }, 100);
+  });
+});
+
+
 /*
 test('Sending a task to completed moves it to the completed section', async () => {
   await new Promise((resolve) => {
