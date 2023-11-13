@@ -1,16 +1,18 @@
 //Collection of tests to be performed
 import { equal, test } from './test-helpers.js'
-/*
+
 test('Submitting a new task adds it to the list', async () => {
   await new Promise((resolve) => {
     setTimeout(() => {
+      console.group('Submitting a new task adds it to the list');
+
       const inputField = document.querySelector('.addTaskField');
       const addTaskButton = document.querySelector('.addTaskButton');
       const taskList = document.querySelector('#listToDo');
 
       inputField.value = 'Task Create Test';
       addTaskButton.click();
-   
+
       const addedTask = taskList.lastElementChild;
       const taskText = addedTask.querySelector('.taskText').value;
 
@@ -18,7 +20,7 @@ test('Submitting a new task adds it to the list', async () => {
 
       inputField.value = '';
       resolve(); // Resolve the promise after the test completes
-     
+      console.groupEnd('Submitting a new task adds it to the list');
     }, 100);
   });
 });
@@ -62,29 +64,28 @@ test('Clearing task text removes it from the list', async () => {
 test('Adding a task using Enter', async () => {
   await new Promise((resolve) => {
     setTimeout(() => {
-
       console.group('Adding a task using Enter');
 
-      const inputField = document.querySelector('.addTaskField')
-      const taskList = document.querySelector('#listToDo')
+      const inputField = document.querySelector('.addTaskField');
+      const taskList = document.querySelector('#listToDo');
 
-      inputField.value = 'Task Create with Enter Test'
+      inputField.value = 'Task Create with Enter Test';
       // Simulate pressing the Enter key
-      const enterKeyEvent = new KeyboardEvent('keypress', { key: 'Enter' })
-      inputField.dispatchEvent(enterKeyEvent)
+      const enterKeyEvent = new KeyboardEvent('keypress', { key: 'Enter' });
+      inputField.dispatchEvent(enterKeyEvent);
 
-      const addedTask = taskList.lastElementChild
-      const taskText = addedTask.querySelector('.taskText').value
+      const addedTask = taskList.lastElementChild;
+      const taskText = addedTask.querySelector('.taskText').value;
 
-      equal(taskText.trim(), 'Task Create with Enter Test')
+      equal(taskText.trim(), 'Task Create with Enter Test');
 
-      inputField.value = ''
+      inputField.value = '';
 
-      resolve() // Resolve the promise after the test completes
-      console.groupEnd('Adding a task using Enter')
-    }, 100)
-  })
-})
+      resolve(); // Resolve the promise after the test completes
+      console.groupEnd('Adding a task using Enter');
+    }, 100);
+  });
+});
 */
 /*
 test('Creating a new group adds it to the group list', async () => {
