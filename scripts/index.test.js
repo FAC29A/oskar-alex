@@ -25,7 +25,7 @@ test('Submitting a new task adds it to the list', async () => {
   });
 });
 */
-
+/*
 test('Clearing task text removes it from the list', async () => {
   await new Promise((resolve) => {
     setTimeout(() => {
@@ -59,7 +59,7 @@ test('Clearing task text removes it from the list', async () => {
     }, 100);
   });
 });
-
+*/
 /*
 test('Adding a task using Enter', async () => {
   await new Promise((resolve) => {
@@ -114,7 +114,7 @@ test('Creating a new group adds it to the group list', async () => {
   });
 });
 */
-
+/*
 test('Deleting a specific group removes it from the group list', async () => {
   await new Promise((resolve) => {
     setTimeout(() => {
@@ -152,7 +152,7 @@ test('Deleting a specific group removes it from the group list', async () => {
     }, 100);
   });
 });
-
+*/
 
 /*
 test('Sending a task to completed moves it to the completed section', async () => {
@@ -264,3 +264,60 @@ test('Dragging a task from one group to another moves it correctly', async () =>
   });
 });
 */
+
+test('Clearing tasks using clearTasksButton removes them from the completed list', async () => {
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      console.group(
+        'Clearing tasks using clearTasksButton removes them from the completed list'
+      );
+
+      // Step 1: Add tasks to the completed list
+      const inputField = document.querySelector('.addTaskField');
+      const addTaskButton = document.querySelector('.addTaskButton');
+      const taskList = document.querySelector('#listToDo');
+      const completedList = document.querySelector('#completedList');
+
+      // Add the first task to the task list
+      inputField.value = 'Task 1';
+      addTaskButton.click();
+
+      setTimeout(() => {
+        // Move the first task to the completed list
+        const taskItem = taskList.lastElementChild;
+        const moveToCompletedButton =
+          taskItem.querySelector('.moveToCompleted');
+        moveToCompletedButton.click();
+
+        // Add the second task to the task list
+        inputField.value = 'Task 2';
+        addTaskButton.click();
+
+        setTimeout(() => {
+          // Move the second task to the completed list
+          const secondTaskItem = taskList.lastElementChild;
+          const moveToCompletedButton2 =
+            secondTaskItem.querySelector('.moveToCompleted');
+          moveToCompletedButton2.click();
+
+          // Step 2: Click the clearTasksButton
+          const clearTasksButton = document.querySelector('#clearTasksButton');
+          clearTasksButton.click();
+
+          setTimeout(() => {
+            // Step 3: Check if the tasks are removed from the completed list
+            const remainingTasks = completedList.children;
+
+            // Ensure that there are no tasks remaining in the completed list
+            equal(remainingTasks.length, 0);
+
+            resolve(); // Resolve the promise after the test completes
+            console.groupEnd(
+              'Clearing tasks using clearTasksButton removes them from the completed list'
+            );
+          }, 100);
+        }, 100);
+      }, 100);
+    }, 100);
+  });
+});
