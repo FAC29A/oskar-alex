@@ -24,6 +24,41 @@ test('Submitting a new task adds it to the list', async () => {
     }, 100);
   });
 });
+*/
+
+test('Clearing task text removes it from the list', async () => {
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      console.group('Clearing task text removes it from the list');
+
+      const inputField = document.querySelector('.addTaskField');
+      const addTaskButton = document.querySelector('.addTaskButton');
+      const taskList = document.querySelector('#listToDo');
+
+      inputField.value = 'Task Create Test';
+      addTaskButton.click();
+
+      const addedTask = taskList.lastElementChild;
+      const taskText = addedTask.querySelector('.taskText');
+
+      // Clear the task text
+      taskText.value = '';
+      // Trigger an input event to simulate user input
+      taskText.dispatchEvent(new Event('input'));
+
+      // Trigger a keypress event to simulate pressing "Enter"
+      const enterEvent = new KeyboardEvent('keypress', { key: 'Enter' });
+      taskText.dispatchEvent(enterEvent);
+
+      // Ensure the task is removed from the list when text is cleared
+      equal(taskList.childElementCount, 0);
+
+      inputField.value = '';
+      resolve(); // Resolve the promise after the test completes
+      console.groupEnd('Clearing task text removes it from the list');
+    }, 100);
+  });
+});
 
 /*
 test('Adding a task using Enter', async () => {
