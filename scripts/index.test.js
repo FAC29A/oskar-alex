@@ -1,323 +1,278 @@
 //Collection of tests to be performed
 import { equal, test } from './test-helpers.js'
-/*
-test('Submitting a new task adds it to the list', async () => {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      console.group('Submitting a new task adds it to the list');
 
-      const inputField = document.querySelector('.addTaskField');
-      const addTaskButton = document.querySelector('.addTaskButton');
-      const taskList = document.querySelector('#listToDo');
+// Asynchronous function to wait for an element to appear in the DOM
+async function waitForElement(selector, timeout = 5000) {
+	const startTime = Date.now()
 
-      inputField.value = 'Task Create Test';
-      addTaskButton.click();
+	return new Promise((resolve, reject) => {
+		;(function checkElement() {
+			const element = document.querySelector(selector)
+			if (element) {
+				resolve(element)
+			} else if (Date.now() - startTime > timeout) {
+				reject(new Error(`Element ${selector} not found within ${timeout}ms`))
+			} else {
+				setTimeout(checkElement, 100) // Check every 100ms
+			}
+		})()
+	})
+}
 
-      const addedTask = taskList.lastElementChild;
-      const taskText = addedTask.querySelector('.taskText').value;
+// Main function to run tests sequentially
+async function testsBatch() {
+	//This first await ensures that all the fields are created
+	await waitForElement('.addTaskField')
+	await test01()
+	await test02()
+	await test03()
+	await test04()
+	await test05()
+	await test06()
+	await test07()
+	await test08()
+}
 
-      equal(taskText.trim(), 'Task Create Test');
+async function test01() {
+	return test('01 Submitting a new task adds it to the list', async () => {
+		const inputField = document.querySelector('.addTaskField')
+		const addTaskButton = document.querySelector('.addTaskButton')
+		const taskList = document.querySelector('#listToDo')
 
-      inputField.value = '';
-      resolve(); // Resolve the promise after the test completes
-      console.groupEnd('Submitting a new task adds it to the list');
-    }, 100);
-  });
-});
-*/
-/*
-test('Clearing task text removes it from the list', async () => {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      console.group('Clearing task text removes it from the list');
+		inputField.value = 'Task Create Test'
+		addTaskButton.click()
 
-      const inputField = document.querySelector('.addTaskField');
-      const addTaskButton = document.querySelector('.addTaskButton');
-      const taskList = document.querySelector('#listToDo');
+		const addedTask = taskList.lastElementChild
+		const taskText = addedTask.querySelector('.taskText').value
 
-      inputField.value = 'Task Create Test';
-      addTaskButton.click();
+		equal(taskText.trim(), 'Task Create Test')
 
-      const addedTask = taskList.lastElementChild;
-      const taskText = addedTask.querySelector('.taskText');
+		inputField.value = ''
 
-      // Clear the task text
-      taskText.value = '';
-      // Trigger an input event to simulate user input
-      taskText.dispatchEvent(new Event('input'));
+		//Remove the task
+		addedTask.remove()
+	})
+}
 
-      // Trigger a keypress event to simulate pressing "Enter"
-      const enterEvent = new KeyboardEvent('keypress', { key: 'Enter' });
-      taskText.dispatchEvent(enterEvent);
+async function test02() {
+	return test('02 Clearing task text removes it from the list', async () => {
+		// Wait for the necessary elements to be available
+		const inputField = document.querySelector('.addTaskField')
+		const addTaskButton = document.querySelector('.addTaskButton')
+		const taskList = document.querySelector('#listToDo')
 
-      // Ensure the task is removed from the list when text is cleared
-      equal(taskList.childElementCount, 0);
+		inputField.value = 'Task Create Test'
+		addTaskButton.click()
 
-      inputField.value = '';
-      resolve(); // Resolve the promise after the test completes
-      console.groupEnd('Clearing task text removes it from the list');
-    }, 100);
-  });
-});
-*/
-/*
-test('Adding a task using Enter', async () => {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      console.group('Adding a task using Enter');
+		const addedTask = taskList.lastElementChild
+		const taskText = addedTask.querySelector('.taskText')
 
-      const inputField = document.querySelector('.addTaskField');
-      const taskList = document.querySelector('#listToDo');
+		// Clear the task text
+		taskText.value = ''
+		taskText.dispatchEvent(new Event('input'))
 
-      inputField.value = 'Task Create with Enter Test';
-      // Simulate pressing the Enter key
-      const enterKeyEvent = new KeyboardEvent('keypress', { key: 'Enter' });
-      inputField.dispatchEvent(enterKeyEvent);
+		// Simulate pressing "Enter"
+		taskText.dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }))
 
-      const addedTask = taskList.lastElementChild;
-      const taskText = addedTask.querySelector('.taskText').value;
+		equal(
+			'# tasks on list:' + taskList.childElementCount,
+			'# tasks on list:' + 0
+		)
 
-      equal(taskText.trim(), 'Task Create with Enter Test');
+		inputField.value = ''
+	})
+}
 
-      inputField.value = '';
+async function test03() {
+	return test('03 Adding a task using Enter', async () => {
+		const inputField = document.querySelector('.addTaskField')
+		const taskList = document.querySelector('#listToDo')
 
-      resolve(); // Resolve the promise after the test completes
-      console.groupEnd('Adding a task using Enter');
-    }, 100);
-  });
-});
-*/
-/*
-test('Creating a new group adds it to the group list', async () => {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      console.group('Creating a new group adds it to the group list')
+		inputField.value = 'Task Create with Enter Test'
+		// Simulate pressing the Enter key
+		const enterKeyEvent = new KeyboardEvent('keypress', { key: 'Enter' })
+		inputField.dispatchEvent(enterKeyEvent)
 
-      // Corrected the selector to use ID instead of class
-      const createGroupButton = document.querySelector('#createGroupButton')
-      const groupList = document.querySelector('.groupsContainer')
-      
-      createGroupButton.click()
-      const addedGroup = groupList.lastElementChild // Get the last group element added
-      // Set the group name
-      const groupTitleInput = addedGroup.querySelector('.groupTitle')
-      groupTitleInput.value = 'Test Group'
+		const addedTask = taskList.lastElementChild
+		const taskText = addedTask.querySelector('.taskText').value
 
-      //Check
-      const testGroup = groupList.lastElementChild
-      const testgroupTitleInput = testGroup.querySelector('.groupTitle')
-      const groupName = testgroupTitleInput.value
-      equal(groupName.trim(), 'Test Group')
-      resolve() // Resolve the promise after the test completes
-      console.groupEnd('Creating a new group adds it to the group list')
-    }, 100);
-  });
-});
-*/
-/*
-test('Deleting a specific group removes it from the group list', async () => {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      console.group('Deleting a specific group removes it from the group list');
+		equal(taskText.trim(), 'Task Create with Enter Test')
 
-      // Step 1: Create a new group
-      const createGroupButton = document.querySelector('#createGroupButton');
-      createGroupButton.click();
+		inputField.value = ''
 
-      setTimeout(() => {
-        // Step 2: Find the newly created group
-        const groupList = document.querySelector('.groupsContainer');
-        const newGroup = groupList.lastElementChild;
+		//Remove the task
+		addedTask.remove()
+	})
+}
 
-        // Step 3: Simulate clicking the delete button for the new group
-        const deleteGroupButton = newGroup.querySelector('.deleteGroupButton');
-        deleteGroupButton.click();
+async function test04() {
+	return test('04 Creating a new group adds it to the group list', async () => {
+		// Corrected the selector to use ID instead of class
+		const createGroupButton = document.querySelector('#createGroupButton')
+		const groupList = document.querySelector('.groupsContainer')
 
-        setTimeout(() => {
-          // Step 4: Check if the specific group is removed from the group list
-          const remainingGroups = document.querySelectorAll('.tasksContainer');
+		createGroupButton.click()
+		const addedGroup = groupList.lastElementChild // Get the last group element added
+		// Set the group name
+		const groupTitleInput = addedGroup.querySelector('.groupTitle')
+		groupTitleInput.value = 'Test Group'
 
-          // Ensure that the specific group is not present
-          const isSpecificGroupPresent = Array.from(remainingGroups).some(
-            (group) => group === newGroup
-          );
-          equal(isSpecificGroupPresent, false);
+		//Check
+		const testGroup = groupList.lastElementChild
+		const testgroupTitleInput = testGroup.querySelector('.groupTitle')
+		const groupName = testgroupTitleInput.value
+		equal(groupName.trim(), 'Test Group')
+	})
+}
 
-          resolve(); // Resolve the promise after the test completes
-          console.groupEnd(
-            'Deleting a specific group removes it from the group list'
-          );
-        }, 100);
-      }, 100);
-    }, 100);
-  });
-});
-*/
+async function test05() {
+	return test('05 Deleting a specific group removes it from the group list', async () => {
+		// Step 1: Create a new group
+		const createGroupButton = document.querySelector('#createGroupButton')
+		createGroupButton.click()
 
-/*
-test('Sending a task to completed moves it to the completed section', async () => {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      console.group('Sending a task to completed moves it to the completed section')
+		// Step 2: Find the newly created group
+		const groupList = document.querySelector('.groupsContainer')
+		const newGroup = groupList.lastElementChild
 
-      // Step 1: Create a new task
-      const inputField = document.querySelector('.addTaskField')
-      const addTaskButton = document.querySelector('.addTaskButton')
-      inputField.value = 'Task for Completion Test'
-      addTaskButton.click()
+		// Step 3: Simulate clicking the delete button for the new group
+		const deleteGroupButton = newGroup.querySelector('.deleteGroupButton')
+		deleteGroupButton.click()
 
-      setTimeout(() => {
-        // Step 2: Find and click the 'send to complete' button for the new task
-        const taskList = document.querySelector('#listToDo')
-        const newTask = taskList.lastElementChild
-        const moveToCompletedButton = newTask.querySelector('.moveToCompleted')
-        moveToCompletedButton.click()
+		// Step 4: Check if the specific group is removed from the group list
+		const remainingGroups = document.querySelectorAll('.tasksContainer')
 
-        setTimeout(() => {
-          // Step 3: Check if the task is now in the completed section
-          const completedList = document.querySelector('#completedList')
-          const completedTask = completedList.lastElementChild
+		// Ensure that the specific group is not present
+		const isSpecificGroupPresent = Array.from(remainingGroups).some(
+			(group) => group === newGroup
+		)
+		equal(isSpecificGroupPresent, false)
+	})
+}
 
-          // Adjust this line based on the actual structure of the completed task
-          const completedTaskText = completedTask ? completedTask.textContent.trim() : null
+async function test06() {
+	return test('06 Sending a task to completed moves it to the completed section', async () => {
+		// Step 1: Create a new task
+		const inputField = document.querySelector('.addTaskField')
+		const addTaskButton = document.querySelector('.addTaskButton')
+		inputField.value = 'Task for Completion Test'
+		addTaskButton.click()
 
-          equal(completedTaskText.trim(), 'Task for Completion Test')
+		// Step 2: Find and click the 'send to complete' button for the new task
+		const taskList = document.querySelector('#listToDo')
+		const newTask = taskList.lastElementChild
+		const moveToCompletedButton = newTask.querySelector('.moveToCompleted')
+		moveToCompletedButton.click()
 
-          inputField.value = '' // Clean up
+		// Step 3: Check if the task is now in the completed section
+		const completedList = document.querySelector('#completedList')
+		const completedTask = completedList.lastElementChild
 
-          resolve()
+		// Adjust this line based on the actual structure of the completed task
+		const completedTaskText = completedTask
+			? completedTask.textContent.trim()
+			: null
 
-          console.groupEnd('Sending a task to completed moves it to the completed section')
-        }, 100)
-      }, 100)
-    }, 100)
-  })
-}) */
+		equal(completedTaskText.trim(), 'Task for Completion Test')
 
-/*
-test('Dragging a task from one group to another moves it correctly', async () => {
-  await new Promise((resolve) => {
-    setTimeout(async () => {
-      console.group('Dragging a task from one group to another');
+		inputField.value = '' // Clean up
+	})
+}
 
-      // Step 1: Identify the first two groups
-      const groups = document.querySelectorAll('.tasksContainer');
-      const firstGroup = groups[0];
-      const secondGroup = groups[1];
+async function test07() {
+	return test('07 Dragging a task from one group to another', async () => {
+		// Step 1: Identify the first two groups
+		const groups = document.querySelectorAll('.tasksContainer')
+		const firstGroup = groups[0]
+		const secondGroup = groups[1]
 
-      // Step 2: Add a task to the first group
-      const inputFieldFirstGroup = firstGroup.querySelector('.addTaskField');
-      const addTaskButtonFirstGroup = firstGroup.querySelector('.addTaskButton');
-      inputFieldFirstGroup.value = 'Task to Move';
-      addTaskButtonFirstGroup.click();
+		// Step 2: Add a task to the first group
+		const inputFieldFirstGroup = firstGroup.querySelector('.addTaskField')
+		const addTaskButtonFirstGroup = firstGroup.querySelector('.addTaskButton')
+		inputFieldFirstGroup.value = 'Task to Move 1 to 2'
+		addTaskButtonFirstGroup.click()
 
-      setTimeout(() => {
-        // Step 3: Simulate drag-and-drop
-        const taskItem = firstGroup.querySelector('.taskItem');
+		// Step 3: Simulate drag-and-drop
+		const taskItem = firstGroup.querySelector('.taskItem')
 
-        // Check if the taskItem is found
-        if (!taskItem) {
-          console.error('Task item not found in the first group.');
-          return;
-        }
+		// Check if the taskItem is found
+		if (!taskItem) {
+			console.error('Task item not found in the first group.')
+			return
+		}
 
-        // Set the task item ID
-        const taskId = 'task-to-move';
-        taskItem.id = taskId;
+		// Set the task item ID
+		const taskId = 'task-to-move'
+		taskItem.id = taskId
 
-        // Simulate dragstart event on the taskItem
-        const dragStartEvent = new DragEvent('dragstart', {
-          dataTransfer: new DataTransfer(),
-        });
-        dragStartEvent.dataTransfer.setData('text/plain', taskId);
-        taskItem.dispatchEvent(dragStartEvent);
+		// Simulate dragstart event on the taskItem
+		const dragStartEvent = new DragEvent('dragstart', {
+			dataTransfer: new DataTransfer(),
+		})
+		dragStartEvent.dataTransfer.setData('text/plain', taskId)
+		taskItem.dispatchEvent(dragStartEvent)
 
-        // Simulate dragover event on the second group
-        const dragOverEvent = new Event('dragover', { bubbles: true });
-        secondGroup.dispatchEvent(dragOverEvent);
+		// Simulate dragover event on the second group
+		const dragOverEvent = new Event('dragover', { bubbles: true })
+		secondGroup.dispatchEvent(dragOverEvent)
 
-        // Simulate drop event on the second group
-        const dropEvent = new DragEvent('drop', {
-          dataTransfer: dragStartEvent.dataTransfer,
-        });
-        secondGroup.dispatchEvent(dropEvent);
+		// Simulate drop event on the second group
+		const dropEvent = new DragEvent('drop', {
+			dataTransfer: dragStartEvent.dataTransfer,
+		})
+		secondGroup.dispatchEvent(dropEvent)
 
-        setTimeout(() => {
-          // Step 4: Verify that the task is in the second group
-          const movedTask = secondGroup.querySelector(`#${taskId}`);
+		// Step 4: Verify that the task is in the second group
+		const movedTask = secondGroup.querySelector(`#${taskId}`)
 
-          // Check if the movedTask is found
-          if (!movedTask) {
-            console.error('Task item not found in the second group after drop.');
-            return;
-          }
+		// Check if the movedTask is found
+		if (!movedTask) {
+			console.error('Task item not found in the second group after drop.')
+			return
+		}
 
-          const movedTaskText = movedTask.querySelector('.taskText').value.trim();
-          equal(movedTaskText, 'Task to Move');
+		const movedTaskText = movedTask.querySelector('.taskText').value.trim()
+		equal(movedTaskText, 'Task to Move 1 to 2')
+	})
+}
 
-          resolve(); // Resolve the promise after the test completes
+async function test08() {
+	return test('08 Clearing tasks from the completed list', async () => {
+		// Step 1: Add tasks to the completed list
+		const inputField = document.querySelector('.addTaskField')
+		const addTaskButton = document.querySelector('.addTaskButton')
+		const taskList = document.querySelector('#listToDo')
+		const completedList = document.querySelector('#completedList')
 
-          console.groupEnd('Dragging a task from one group to another');
-        }, 100);
-      }, 1000); // Made it extra long to see the task moving
-    }, 200);
-  });
-});
-*/
+		// Add the first task to the task list
+		inputField.value = 'Task 1'
+		addTaskButton.click()
 
-test('Clearing tasks using clearTasksButton removes them from the completed list', async () => {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      console.group(
-        'Clearing tasks using clearTasksButton removes them from the completed list'
-      );
+		// Move the first task to the completed list
+		const taskItem = taskList.lastElementChild
+		const moveToCompletedButton = taskItem.querySelector('.moveToCompleted')
+		moveToCompletedButton.click()
 
-      // Step 1: Add tasks to the completed list
-      const inputField = document.querySelector('.addTaskField');
-      const addTaskButton = document.querySelector('.addTaskButton');
-      const taskList = document.querySelector('#listToDo');
-      const completedList = document.querySelector('#completedList');
+		// Add the second task to the task list
+		inputField.value = 'Task 2'
+		addTaskButton.click()
 
-      // Add the first task to the task list
-      inputField.value = 'Task 1';
-      addTaskButton.click();
+		// Move the second task to the completed list
+		const secondTaskItem = taskList.lastElementChild
+		const moveToCompletedButton2 =
+			secondTaskItem.querySelector('.moveToCompleted')
+		moveToCompletedButton2.click()
 
-      setTimeout(() => {
-        // Move the first task to the completed list
-        const taskItem = taskList.lastElementChild;
-        const moveToCompletedButton =
-          taskItem.querySelector('.moveToCompleted');
-        moveToCompletedButton.click();
+		// Step 2: Click the clearTasksButton
+		const clearTasksButton = document.querySelector('#clearTasksButton')
+		clearTasksButton.click()
 
-        // Add the second task to the task list
-        inputField.value = 'Task 2';
-        addTaskButton.click();
+		// Step 3: Check if the tasks are removed from the completed list
+		const remainingTasks = completedList.children
 
-        setTimeout(() => {
-          // Move the second task to the completed list
-          const secondTaskItem = taskList.lastElementChild;
-          const moveToCompletedButton2 =
-            secondTaskItem.querySelector('.moveToCompleted');
-          moveToCompletedButton2.click();
+		// Ensure that there are no tasks remaining in the completed list
+		equal(remainingTasks.length, 0)
+	})
+}
 
-          // Step 2: Click the clearTasksButton
-          const clearTasksButton = document.querySelector('#clearTasksButton');
-          clearTasksButton.click();
-
-          setTimeout(() => {
-            // Step 3: Check if the tasks are removed from the completed list
-            const remainingTasks = completedList.children;
-
-            // Ensure that there are no tasks remaining in the completed list
-            equal(remainingTasks.length, 0);
-
-            resolve(); // Resolve the promise after the test completes
-            console.groupEnd(
-              'Clearing tasks using clearTasksButton removes them from the completed list'
-            );
-          }, 100);
-        }, 100);
-      }, 100);
-    }, 100);
-  });
-});
+testsBatch()
