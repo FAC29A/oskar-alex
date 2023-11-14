@@ -63,7 +63,7 @@ h2 {
 #sidebar {
 	display: block;
 	position: relative;
-	width: 50%;
+	width: 30%;
 	background-color: var(--completedColour);
 	box-shadow: var(--box-shadow-light);
 	padding-left: 2.5rem;
@@ -117,7 +117,6 @@ h2 {
 }
 
 .tasksContainer {
-	￼Clear Tasks
 	display: block;
 	flex: 1 1 calc(33.333% - 2rem);
 	flex-direction: column;
@@ -125,7 +124,7 @@ h2 {
 	min-width: 10rem;
 	max-width: 30%;
 	height: fit-content;
-	min-height: 10rem;
+	min-height: 12rem;
 	border-radius: 0.2rem;
 	padding: 0.4rem;
 	box-shadow: var(--box-shadow-light);
