@@ -233,6 +233,9 @@ async function test07() {
 
 		const movedTaskText = movedTask.querySelector('.taskText').value.trim()
 		equal(movedTaskText, 'Task to Move 1 to 2')
+
+		
+
 	})
 }
 
