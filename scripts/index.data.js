@@ -3,6 +3,7 @@ export const deafultGroups = [
     backgroundColour: "#D0E6FF"},
     {groupName: "In Progress",
     backgroundColour: "#FFD580"},
-    {backgroundColour: "#E7FFD6"
-   }
+    {groupName: "Instructions - delete →",
+    backgroundColour: "#E7FFD6",
+    Tasks: ['← key moves task to next group', '→ key moves task to previous group', 'Delete key for deleting task', 'Enter to move to completed']},
 ]

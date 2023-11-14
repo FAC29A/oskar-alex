@@ -235,10 +235,23 @@ function deleteGroup(groupId) {
 
 // Create initial default groups
 window.addEventListener('load', (event) => {
-	deafultGroups.forEach((element) => {
-		createGroupUsingTemplate(element.groupName, element.backgroundColour)
-	})
-})
+  deafultGroups.forEach((element, index) => {
+      // Create the group
+      createGroupUsingTemplate(element.groupName, element.backgroundColour);
+
+      // Construct the group ID based on the current group count
+      const uniqueGroupId = `group-${index + 1}`; // groupId starts from 1
+
+      // Check if there are tasks to be added to this group
+      if (element.Tasks && element.Tasks.length > 0) {
+          element.Tasks.forEach(task => {
+              // Add each task to the group
+              addTaskToGroup(task, `#${uniqueGroupId}`);
+          });
+      }
+  });
+});
+
 
 // Add new group button
 const newGroupButton = document.getElementById('createGroupButton')

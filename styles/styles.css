@@ -218,7 +218,7 @@ p,
 	margin-bottom: 1rem;
 }
 
-.moveToCompleted {
+/* .moveToCompleted {
 	background-image: url('../images/check.png');
 	background-color: transparent;
 	height: 1rem;
@@ -229,11 +229,14 @@ p,
 	outline: none;
 	cursor: pointer;
 	margin: 0;
-}
+} */
 
-.moveToCompleted:hover,
-.moveToCompleted:hover {
-	transform: scale(1.03);
+#createGroupButton:hover,
+#createGroupButton:focus
+/* .moveToCompleted:hover,
+.moveToCompleted:hover */
+{
+	transform: scale(1.2);
 	transition: transform 0.15s ease;
 }
 
