@@ -96,8 +96,6 @@ h2 {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
-	box-shadow: 0px 1px 10px rgba(0, 0, 0, 1);
-	border-radius: 50%;
 	cursor: pointer;
 }
 
@@ -137,7 +135,7 @@ h2 {
 .listAndField {
 	display: flex;
 	flex-direction: column;
-	min-height: 8rem;
+	min-height: 11rem;
 	justify-content: space-between;
 }
 
@@ -158,13 +156,12 @@ li {
 	display: flex;
 	justify-content: space-between;
 	font-size: medium;
-	border-style: none;
+	border: solid 1px black;
 	border-radius: 0.2rem;
 	list-style-type: none;
 	padding: 0.2rem 0.2rem;
 	background-color: beige;
 	margin-bottom: 0.2rem;
-	box-shadow: var(--box-shadow-light);
 	outline: none;
 }
 
