@@ -82,6 +82,10 @@ h2 {
 	background-image: url('../images/left.png');
 }
 
+.hidden #clearTasksButton {
+	display: none;
+}
+
 .sidebar-toggle {
 	position: absolute;
 	left: 0px; /* Align to the left edge of the sidebar */
