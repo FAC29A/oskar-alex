@@ -3,7 +3,8 @@
 ## Introduction
 Welcome to the Task Manager project! Task Manager is a simple and efficient task management application designed to help users organize and keep track of their tasks. This app focuses on providing a seamless experience for adding, managing, and completing tasks. The user-friendly interface allows users to interact with the app using keyboard shortcuts, making it accessible for users who prefer a mouse-free experience.
 
-![image](https://hackmd.io/_uploads/B1HWQ_ZNT.png)
+![image](https://github.com/FAC29A/oskar-alex/assets/97399953/ec9f621b-ea73-48e4-830c-81e97dba8e2a)
+
 
 ## Features
 ### Core Features
@@ -31,8 +32,7 @@ Task Manager improves accessibility by offering mouse-free feature:
 4. Use keyboard shortcuts to move tasks between groups, delete tasks, and validate task completion.
 5. Stay organized and keep track of your tasks effortlessly with Task Manager.
 
-![image](https://hackmd.io/_uploads/HkqLfdWNa.png)
-
+![image](https://github.com/FAC29A/oskar-alex/assets/97399953/975ecc6c-e4ea-40d0-83e5-65280f3871de)
 
 ## Contributors
 Feel free to contribute to the project and enhance the Task Manager experience. Your contributions are valuable in making task management more accessible and user-friendly.
