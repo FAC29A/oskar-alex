@@ -124,6 +124,7 @@ function moveTaskToAdjacentGroup(taskItem, direction) {
 	if (targetGroup) {
 		const targetList = targetGroup.querySelector('#listToDo')
 		targetList.appendChild(taskItem)
+    taskItem.focus()
 	}
 }
 

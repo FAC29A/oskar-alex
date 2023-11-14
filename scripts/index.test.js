@@ -122,6 +122,10 @@ async function test04() {
 		const testgroupTitleInput = testGroup.querySelector('.groupTitle')
 		const groupName = testgroupTitleInput.value
 		equal(groupName.trim(), 'Test Group')
+
+		// Delete chreated group
+		const deleteGroupButton = testGroup.querySelector('.deleteGroupButton')
+		deleteGroupButton.click()
 	})
 }
 
@@ -150,6 +154,7 @@ async function test05() {
 	})
 }
 
+// Deprecated. We don't have the move to complete button anymore
 /* async function test06() {
 	return test('06 Sending a task to completed moves it to the completed section', async () => {
 		// Step 1: Create a new task
