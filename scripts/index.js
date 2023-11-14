@@ -34,9 +34,10 @@ function handleAddTaskFieldEnter(event, group) {
 		const inputField = event.target
 		const taskText = inputField.value.trim()
 
-		if (taskText && group)
+		if (taskText && group) {
 			// Create and add the task
 			createTaskUsingTemplate(taskText, group)
+		}
 
 		// Clear the input field after adding the task
 		inputField.value = ''
@@ -76,18 +77,61 @@ export function createTaskUsingTemplate(text, group) {
 	// Add drag event listener
 	taskItem.addEventListener('dragstart', handleDragStart)
 
-	// event listener to remove task
+	// event listener to remove task when the taskText is empty
 	field.addEventListener('keypress', function (event) {
 		if (event.key === 'Enter' || event.code === 'Enter') {
 			deleteTask(event)
 		}
 	})
 
-	// event listener for moveToCompleted
-	const moveToCompletedButton = domFragment.querySelector('.moveToCompleted')
-	moveToCompletedButton.addEventListener('click', handleMoveToCompleted)
+	// Add 'Enter', 'Delete', 'Backspace', 'ArrowLeft', and 'ArrowRight' key event listener
+	taskItem.addEventListener('keydown', function (event) {
+		switch (event.key) {
+			case 'Enter':
+				handleMoveToCompleted(event)
+				break
+			case 'Delete':
+			case 'Backspace':
+				deleteTaskItem(taskItem)
+				break
+			case 'ArrowLeft':
+				moveTaskToAdjacentGroup(taskItem, 'previous')
+				break
+			case 'ArrowRight':
+				moveTaskToAdjacentGroup(taskItem, 'next')
+				break
+		}
+	})
 
 	taskList.appendChild(domFragment)
+}
+
+// Function to move a task item to the adjacent group
+function moveTaskToAdjacentGroup(taskItem, direction) {
+	const currentGroup = taskItem.closest('.tasksContainer')
+	let targetGroup
+
+	if (direction === 'previous') {
+		targetGroup =
+			currentGroup.previousElementSibling ||
+			document.querySelector('.tasksContainer:last-child')
+	} else {
+		targetGroup =
+			currentGroup.nextElementSibling ||
+			document.querySelector('.tasksContainer:first-child')
+	}
+
+	if (targetGroup) {
+		const targetList = targetGroup.querySelector('#listToDo')
+		targetList.appendChild(taskItem)
+	}
+}
+
+// Function to delete a task item
+function deleteTaskItem(taskItem) {
+	if (taskItem) {
+		taskItem.remove()
+	}
 }
 
 // Handle move to completed logic
@@ -286,8 +330,7 @@ function handleDropOnCompleted(event) {
 
 function handleDrop(event) {
 	const targetIsCompletedPanel =
-		event.target.id === 'sidebar' ||
-		event.target.closest('#sidebar')
+		event.target.id === 'sidebar' || event.target.closest('#sidebar')
 	if (targetIsCompletedPanel) {
 		handleDropOnCompleted(event)
 	} else {
@@ -300,12 +343,12 @@ const completedSidepanel = document.getElementById('sidebar')
 
 // Allow the drop action by preventing the default handling of the 'dragover' event
 completedSidepanel.addEventListener('dragover', function (event) {
-  event.preventDefault(); // This is necessary to allow the drop
-  event.dataTransfer.dropEffect = 'move'; // Optional: this gives visual feedback during drag
-});
+	event.preventDefault() // This is necessary to allow the drop
+	event.dataTransfer.dropEffect = 'move' // Optional: this gives visual feedback during drag
+})
 
 // Handle the drop action with the 'drop' event
-completedSidepanel.addEventListener('drop', handleDrop);
+completedSidepanel.addEventListener('drop', handleDrop)
 
 // Update the event listeners for the Completed sidepanel
 const completedList = document.getElementById('completedList')
