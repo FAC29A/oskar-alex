@@ -3,9 +3,7 @@
 	--medium-dark-grey: rgba(37, 37, 37, 0.719);
 	--font: 'Roboto', sans-serif;
 
-	--toDoColour: #a3cef1;
-	--inProgressColour: #ffca28;
-	--completedColour: #81c784;
+	--completedColour: #c7c381;
 
 	--box-shadow-light: 0 0 1.25rem rgba(0, 0, 0, 0.58);
 	--box-shadow-hard: 0 0 3.75rem rgba(0, 0, 0, 0.9);
@@ -65,10 +63,10 @@ h2 {
 #sidebar {
 	display: block;
 	position: relative;
-	width: 200%;
-	background-color: beige;
+	width: 50%;
+	background-color: var(--completedColour);
 	box-shadow: var(--box-shadow-light);
-	padding-left: 1.5rem;
+	padding-left: 2.5rem;
 	padding-top: 0.2rem;
 	padding-bottom: 0.5rem;
 	padding-right: 0;
@@ -105,6 +103,7 @@ h2 {
 }
 
 .groupsContainer {
+	flex-grow: 1;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -114,12 +113,13 @@ h2 {
 }
 
 .tasksContainer {
+	￼Clear Tasks
 	display: block;
 	flex: 1 1 calc(33.333% - 2rem);
 	flex-direction: column;
 	justify-content: space-between;
 	min-width: 10rem;
-	/* max-width: 30%;*/
+	max-width: 30%;
 	height: fit-content;
 	min-height: 10rem;
 	border-radius: 0.2rem;
@@ -251,5 +251,10 @@ p,
 	bottom: 1rem;
 	left: 50%;
 	transform: translateX(-50%);
-	height: 1.5rem;
+	width: 3.5rem;
+	height: fit-content;
+}
+
+#completedList {
+	margin-bottom: 4rem;
 }
